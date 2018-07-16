@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css?family=Arsenal" rel="stylesheet">
   <title>JS weird parts</title>
 </head>
+
 <body>
   <h1>JavaScript - The weird parts</h1>
   <section>
@@ -33,7 +35,7 @@
       <p>Un Nombre que apunta o mapea a un unico valor. <br>El nombre puede ser difinido mas de una vez pero, solo puede tener un valor en cualquier contexo dado.</p>
       <p>El valor pueden ser mas parejas nombre/valor.</p>
       <code>ciudad = 'bogota'</code>
-      <p>nombre: ciudad <br>  valor: bogota</p>
+      <p>nombre: ciudad <br> valor: bogota</p>
     </div>
     <div>
       <h3>Objeto</h3>
@@ -43,11 +45,14 @@
   </section>
   <section>
     <h2>The Global environment and The global object </h2>
-    <p>Cuando hablamos de global, hablamos de algo que es accesible desde cualquier parte de nuestro código y siempre hay dos cosas que se creán automaticamente para nosotros en el contexto global que son un <b>Global Object</b> y <b>this</b>, estos dos objetos son creados para nosotros por el engine de JavaScript.</p>
-    <p>Si queremos ver esto, lo que podemos hacer es simplemente abrir en nuestro explorador un archivo html que no incluya ningúna tipo de JS asociado o podemos vincular un archivo .js pero que no contenga nada, si nos vamos a dev tools de nuestro explorador y en la consola escribimos <code>window</code> o <code>this</code> lo que vamos a ver es lo siguiente:</p>
+    <p>Cuando hablamos de global, hablamos de algo que es accesible desde cualquier parte de nuestro código y siempre hay dos cosas que se creán automaticamente para nosotros en el contexto global que son un <b>Global Object</b> y <b>this</b>, estos dos
+      objetos son creados para nosotros por el engine de JavaScript.</p>
+    <p>Si queremos ver esto, lo que podemos hacer es simplemente abrir en nuestro explorador un archivo html que no incluya ningúna tipo de JS asociado o podemos vincular un archivo .js pero que no contenga nada, si nos vamos a dev tools de nuestro explorador
+      y en la consola escribimos <code>window</code> o <code>this</code> lo que vamos a ver es lo siguiente:</p>
     <img class="code-img" src="./media/window_this.png" alt="">
-    <p>Lo que nos devuelve la consola es un objeto global llamado <code>window</code> en ambos casos, tanto con <b>this</b> como con <b>window</b>, esto solo sucede porque estamos en el contexto global, en donde <b>window</b> es básicamente el contexto global y <b>this</b> se refiere al contexto en donde lo estamos llamando que en este caso son lo mismo.</p>
-    <p>El concepto global significa sencillamente que no estamos dentro de ninguna función.  </p>
+    <p>Lo que nos devuelve la consola es un objeto global llamado <code>window</code> en ambos casos, tanto con <b>this</b> como con <b>window</b>, esto solo sucede porque estamos en el contexto global, en donde <b>window</b> es básicamente el contexto global
+      y <b>this</b> se refiere al contexto en donde lo estamos llamando que en este caso son lo mismo.</p>
+    <p>El concepto global significa sencillamente que no estamos dentro de ninguna función. </p>
   </section>
   <section>
     <h2>The Execution Context: Creation and 'Hoisting'</h2>
@@ -60,14 +65,18 @@
     <p>Si ejecutamos este código en la consola del explorador vamos a ver lo siguiente:</p>
     <img class="code-img" src="./media/creation_hoisting_four.png" alt="">
     <p>Que pasó?? Antes tanto el llamado a la variable como a la función devolvían los valores correctos pero ahora la variable nos devuelvle el valor de <b>undefined</b> y la función el valor correcto.</p>
-    <p>Se dice que al momento de ejecutarse el código sucede algo que llaman 'Hoisting' y que lo que supuestamente sucede es que la declaración de variables y de funciones son movidas hacia la parte mas alta del código, <b>pero</b> si esto realmente sucediera, por qué el valor devuelto a nuestra variable es <b>undefined</b> mientras que a nuestra función si es el correcto?</p>
+    <p>Se dice que al momento de ejecutarse el código sucede algo que llaman 'Hoisting' y que lo que supuestamente sucede es que la declaración de variables y de funciones son movidas hacia la parte mas alta del código, <b>pero</b> si esto realmente sucediera,
+      por qué el valor devuelto a nuestra variable es <b>undefined</b> mientras que a nuestra función si es el correcto?</p>
     <p>Lo que realmente pasa es que la creación de un <b>Execution Context</b> sucede en dos fases, una es la <b>Fase de Creación</b> que es en donde sucede lo siguiente:</p>
     <img class="img-custom" src="./media/creation_hoisting_phase_one.png" alt="">
-    <p>Durante ese proceso de prepara el espacio en memoria para las funciones y las variables, que es lo que realmente es hoisting, se toma unicamente lo que está antes de una asignación <b>=</b> por esta razón es que en el caso de la variable se toma solamente el nombre <b>var a</b> y la función se toma completa porque no hay asignación. Al tomar el lado izquierdo de la asignación el engine le asigna un marcador de posición o placeholder con el valor de 'undefined' el cual es redifinido en la fase de ejecución si la variable es invocada después de habersele asignado un valor.  <mark>Siempre es mejor idea invocar variables y funciones después de haber sido declaradas.</mark></p>
+    <p>Durante ese proceso de prepara el espacio en memoria para las funciones y las variables, que es lo que realmente es hoisting, se toma unicamente lo que está antes de una asignación <b>=</b> por esta razón es que en el caso de la variable se toma solamente
+      el nombre <b>var a</b> y la función se toma completa porque no hay asignación. Al tomar el lado izquierdo de la asignación el engine le asigna un marcador de posición o placeholder con el valor de 'undefined' el cual es redifinido en la fase de
+      ejecución si la variable es invocada después de habersele asignado un valor. <mark>Siempre es mejor idea invocar variables y funciones después de haber sido declaradas.</mark></p>
   </section>
   <section>
     <h2>JavaScript and 'Undefined'</h2>
-    <p>Como vimos antes, undefined es un valor que les da el engine de JS a las variables en la fase de creación, así todas las variables tengan un valor asignado siempre se les dará el valor de undefined en la primera fase, ya después en la fase de ejecuciónm, el valor de la variable será actualizado si al momento de que esa variable sea usada su valor ya haya sido asignado.</p>
+    <p>Como vimos antes, undefined es un valor que les da el engine de JS a las variables en la fase de creación, así todas las variables tengan un valor asignado siempre se les dará el valor de undefined en la primera fase, ya después en la fase de ejecuciónm,
+      el valor de la variable será actualizado si al momento de que esa variable sea usada su valor ya haya sido asignado.</p>
     <p>En caso </p>
   </section>
   <section>
@@ -77,35 +86,37 @@
   </section>
   <section>
     <h2>Single Threaded, Synchronous Execution</h2>
-      <h3>Single Threader</h3>
-        <p>Un comando se ejecuta a la vez, no mas de uno a la vez.</p>
-      <h3>Asynchronous</h3>
-        <p>Muy parecido al anterior, un comando a la vez! pero además en orden de acuerdo a como van apareciendo.</p>
+    <h3>Single Threader</h3>
+    <p>Un comando se ejecuta a la vez, no mas de uno a la vez.</p>
+    <h3>Asynchronous</h3>
+    <p>Muy parecido al anterior, un comando a la vez! pero además en orden de acuerdo a como van apareciendo.</p>
   </section>
   <section>
     <h2>Function Invocation And The Execution Stack</h2>
-      <h3>Invocation</h3>
-      <p>Invocar significa llamar una función, hacer que se ejecute y lo hacemos con el nombre de la función y parenthesis: <code>a();</code>, pero que pasa cuando invocamos una función? pensemos en el siguiente ejemplo:</p>
-      <img src="./media/execution_stack_one.png" alt="">
-      <p>Cómo sabemos, JS es Synchronous y Sinlge Threaded y por lo tanto ejecuta una linea por vez y en orden, y sabemos que un contexto de ejecución consta de dos fases, la de creación y la de ejecución. </p>
-      <p>En este ejemplo en la primera fase la función <b>a</b> y la función <b>b</b> serán guardadas en memoria y en la segunda fase se ejecutará el código linea por linea.</p>
-      <ol>
-        <li>
-          <p>Lo primero en ejecutarse será la función <b>a</b> ya que es la primera en ser invocada <code>a();</code> en el contexto global, como es una función, para su ejecución se crea un nuevo contexto de ejecución (Execution Context) que es apilado sobre el contexto global, esto se denomina <b>Pila de Ejecución (Execution Stack)</b>:</p>
-          <img class="img-custom" src="./media/execution_stack_two.png" alt="">
-          <p>Cada contexto de ejecución tiene la fase de creració y de eejecució y además tiene su propio espacio para la creación de variables y de funciones.</p>
-        </li>
-        <li>
-          <p>Lo siguiente en suceder es la invocación de la función <b>b</b> <code>b();</code> que sucede dentro de la función <b>a</b> y otro contexto de ejecución es creado y apilado sobre el anterior:</p>
-          <img class="img-custom" src="./media/execution_stack_three.png" alt="">
-          <p>Al ejecutarse el contenido de <b>b</b> el contexto de ejecución es movido fuera del stack y se ejecuta el siguiente hacia abajo que en nuestro caso será <b>a</b>.</p>
-        </li>
-      </ol>
-      <p>Los contextos de ejecución se van procesando de arriba hacia abajo</p>
+    <h3>Invocation</h3>
+    <p>Invocar significa llamar una función, hacer que se ejecute y lo hacemos con el nombre de la función y parenthesis: <code>a();</code>, pero que pasa cuando invocamos una función? pensemos en el siguiente ejemplo:</p>
+    <img src="./media/execution_stack_one.png" alt="">
+    <p>Cómo sabemos, JS es Synchronous y Sinlge Threaded y por lo tanto ejecuta una linea por vez y en orden, y sabemos que un contexto de ejecución consta de dos fases, la de creación y la de ejecución. </p>
+    <p>En este ejemplo en la primera fase la función <b>a</b> y la función <b>b</b> serán guardadas en memoria y en la segunda fase se ejecutará el código linea por linea.</p>
+    <ol>
+      <li>
+        <p>Lo primero en ejecutarse será la función <b>a</b> ya que es la primera en ser invocada <code>a();</code> en el contexto global, como es una función, para su ejecución se crea un nuevo contexto de ejecución (Execution Context) que es apilado sobre
+          el contexto global, esto se denomina <b>Pila de Ejecución (Execution Stack)</b>:</p>
+        <img class="img-custom" src="./media/execution_stack_two.png" alt="">
+        <p>Cada contexto de ejecución tiene la fase de creració y de eejecució y además tiene su propio espacio para la creación de variables y de funciones.</p>
+      </li>
+      <li>
+        <p>Lo siguiente en suceder es la invocación de la función <b>b</b> <code>b();</code> que sucede dentro de la función <b>a</b> y otro contexto de ejecución es creado y apilado sobre el anterior:</p>
+        <img class="img-custom" src="./media/execution_stack_three.png" alt="">
+        <p>Al ejecutarse el contenido de <b>b</b> el contexto de ejecución es movido fuera del stack y se ejecuta el siguiente hacia abajo que en nuestro caso será <b>a</b>.</p>
+      </li>
+    </ol>
+    <p>Los contextos de ejecución se van procesando de arriba hacia abajo</p>
   </section>
   <section>
     <h2>Function, Context, And Variable Environments</h2>
-    <p>Cuando creamos una variable debemos tener claro que pasa en cada uno de los contextos de ejecución, como ya vimos, cada función crea un contexto y si las variables son declaradas dentro de un contexto, el valor de la variable solo se verá afectado si es modificado dentro de ese mismo contexto, si hay otra variable con un mismo nombre declarada dentro de otro contexto, su valor no se ve afectado si su nombre cambia en un contexto diferente, veamos un ejemplo claro:</p>
+    <p>Cuando creamos una variable debemos tener claro que pasa en cada uno de los contextos de ejecución, como ya vimos, cada función crea un contexto y si las variables son declaradas dentro de un contexto, el valor de la variable solo se verá afectado
+      si es modificado dentro de ese mismo contexto, si hay otra variable con un mismo nombre declarada dentro de otro contexto, su valor no se ve afectado si su nombre cambia en un contexto diferente, veamos un ejemplo claro:</p>
     <img class="img-custom" src="./media/variable_environment_one.png" alt="">
     <ol>
       <li>La primera variable es declarada en el contexto global <code>var myVar = 1;</code></li>
@@ -118,65 +129,74 @@
   </section>
   <section>
     <h2>The Scope Chain</h2>
-    <p>Cuando hablamos de <b>Scope</b> nos referimos al alcance que tienen cada una de las funciones o variables que declaramos en nuetsros código, como vimos antes, cada una de las funciones creran un contexto de ejecución propio y que si una variable con un mismo nombre es declarada dentro de diferentes contextos de ejecución su valor solo dependerá de los cambios que se hagan dentro de su propio contexto</p>
+    <p>Cuando hablamos de <b>Scope</b> nos referimos al alcance que tienen cada una de las funciones o variables que declaramos en nuetsros código, como vimos antes, cada una de las funciones creran un contexto de ejecución propio y que si una variable con
+      un mismo nombre es declarada dentro de diferentes contextos de ejecución su valor solo dependerá de los cambios que se hagan dentro de su propio contexto</p>
     <p>Tambien vimos que cuando un contexto de ejecución es creado una de las cosas que también es creada para nuestro uso es el <b>Outer Environment</b> o entorno externo, esto es sencillamente una referencia a su enteorno externo mas próximo, veamos: </p>
     <img src="./media/outer_environment_one.png" alt="">
-    <p>En este ejemplo tenemos dos funciones declaradas y declaramos la variable <b>myVar</b> en el contexto global y dentro del contexto de la función <b>a</b>. Dentro de la función <b>b</b> buscamos imprimir en consola el valor de <b>myVar</b> que valor veremos?</p>
-    <p>Aquí debemos tener en cuenta lo que se denomina como <b>Lexical Environment</b> que se refiere al entorno dependiendo de donde ha sido la función o la variable fisicamente declarada, y como fisico nos referimos a su posición de acuerdo al resto de declaraciones, el lugar en que hayamos escrito nuestra función.</p>
-    <img class="img-custom"  src="./media/outer_environment_two.png" alt="">
+    <p>En este ejemplo tenemos dos funciones declaradas y declaramos la variable <b>myVar</b> en el contexto global y dentro del contexto de la función <b>a</b>. Dentro de la función <b>b</b> buscamos imprimir en consola el valor de <b>myVar</b> que valor
+      veremos?</p>
+    <p>Aquí debemos tener en cuenta lo que se denomina como <b>Lexical Environment</b> que se refiere al entorno dependiendo de donde ha sido la función o la variable fisicamente declarada, y como fisico nos referimos a su posición de acuerdo al resto de
+      declaraciones, el lugar en que hayamos escrito nuestra función.</p>
+    <img class="img-custom" src="./media/outer_environment_two.png" alt="">
     <ol>
       <li>En el código que escribimos tanto <b>a</b> como <b>b</b> se encuentran al mismo nivel, las dos declaradas sobre el contexto global</li>
       <li>La variable <b>myVar</b> es declarada sobre el contexto global y dentro del contexto de la función <b>a</b>.</li>
       <li>la función <b>b</b> es invocada dentro de la función <b>a</b></li>
-      <li>Aunque la función <b>b</b> sea invocada dentro de <b>a</b>, la función <b>b</b> fué declarada sobre el contexto global, al no encontrar la variable <b>myVar</b>dentro de su contexto entonces va a buscar en su entorno externo mas cercano que en este caso es el contexto global en donde si encuentra la variable que busca <code>var myVar = 1;</code> y por lo tanto <b>1</b> es el valor que veremos en la consola.</li>
+      <li>Aunque la función <b>b</b> sea invocada dentro de <b>a</b>, la función <b>b</b> fué declarada sobre el contexto global, al no encontrar la variable <b>myVar</b>dentro de su contexto entonces va a buscar en su entorno externo mas cercano que en este
+        caso es el contexto global en donde si encuentra la variable que busca <code>var myVar = 1;</code> y por lo tanto <b>1</b> es el valor que veremos en la consola.</li>
     </ol>
-    <p>Cuando una función es invocada siempre va a tratar de buscar el valor de sus variables en su contexto de ejecució primero, si no la encuentra se va a iniciar un proceso conocido como <b>Scopr Chain</b> que es basicamente la busqueda de la variable a través de todos los entornos externos que sean directamente vinculados:</p>
+    <p>Cuando una función es invocada siempre va a tratar de buscar el valor de sus variables en su contexto de ejecució primero, si no la encuentra se va a iniciar un proceso conocido como <b>Scopr Chain</b> que es basicamente la busqueda de la variable
+      a través de todos los entornos externos que sean directamente vinculados:</p>
     <img class="img-custom" src="./media/outer_environment_three.png" alt="">
   </section>
   <section>
     <h2>Scope, ES6, and let</h2>
-      <h3>Scope</h3>
-        <p>Es en definitiva <b>En donde la variables se encuentra disponible en nuestro código</b> dependiendo si es la misma variable o una copia nueva.</p>
-      <h3>ES6</h3>
-        <p>La última version de JavaScript, ECMASCRIPT 6 o ECMASCRIPT 2016</p>
-      <h4>let</h4>
-        <p><code>let</code> es una nueva forma diferente de declarar variables, <b>let</b> permite usar <b>block scoping</b> vamos a hablar de ella mas adelante.</p>
+    <h3>Scope</h3>
+    <p>Es en definitiva <b>En donde la variables se encuentra disponible en nuestro código</b> dependiendo si es la misma variable o una copia nueva.</p>
+    <h3>ES6</h3>
+    <p>La última version de JavaScript, ECMASCRIPT 6 o ECMASCRIPT 2016</p>
+    <h4>let</h4>
+    <p><code>let</code> es una nueva forma diferente de declarar variables, <b>let</b> permite usar <b>block scoping</b> vamos a hablar de ella mas adelante.</p>
   </section>
   <section>
     <h2>Asynchronous Callbacks</h2>
     <p>Como ya vimos JS es un lenguaje que se ejecuta de forma sincronica (Syncrhonous) lo que significa que el código se ejecuta linea por linea, en JS no es posible ejecutar varias lineas de código a la vez, esto se conoce como <b>single threaded</b></p>
-    <p>Como también ya sabemos cada función va creando un <b>Execution Stack</b> que es el apilamiento de contextos de ejecución, pues bueno, lo que sucede es que el JavaScript Engine tiene algo llamado <b>Event Queue</b> o <b>Cola de eventos</b>. La cola de eventos es una fila de eventos que se va creando y que el engine va ejecutando de acuerdo a como vaya terminando cada uno de los contextos de ejecución que tiene pendientes, tan pronto como termine un <b>Execution Stack</b> el engine se dirije al <b>Event Queue</b> y ejecuta le siguiente tarea pendiente, veamos en la siguinete imagen:</p>
+    <p>Como también ya sabemos cada función va creando un <b>Execution Stack</b> que es el apilamiento de contextos de ejecución, pues bueno, lo que sucede es que el JavaScript Engine tiene algo llamado <b>Event Queue</b> o <b>Cola de eventos</b>. La cola
+      de eventos es una fila de eventos que se va creando y que el engine va ejecutando de acuerdo a como vaya terminando cada uno de los contextos de ejecución que tiene pendientes, tan pronto como termine un <b>Execution Stack</b> el engine se dirije
+      al <b>Event Queue</b> y ejecuta le siguiente tarea pendiente, veamos en la siguinete imagen:</p>
     <img class="img-custom" src="./media/Synchronous_one.png" alt="">
-    <p>Aquí tenemos una pila de contextos ejecutandose, cuando esta pila se haya completado el engine seguirá con la siguiente tarea o evento que en este caso es un click y ejecutará su contexto. <b>No es posible que JavaScript corra o ejecute mas de un contexto de ejecución al tiempo</b> lo vamos a comprobar con el siguiente ejercicio:</p>
+    <p>Aquí tenemos una pila de contextos ejecutandose, cuando esta pila se haya completado el engine seguirá con la siguiente tarea o evento que en este caso es un click y ejecutará su contexto. <b>No es posible que JavaScript corra o ejecute mas de un contexto de ejecución al tiempo</b>      lo vamos a comprobar con el siguiente ejercicio:</p>
     <img class="img-custom" src="./media/Synchronous_two.png" alt="">
-    <p>Cuando corramos este código en la consola y hagamos click sobre la página, lo que vamos a ver es que en la consola no va a imprimirse nada sino hasta que la función <b>waitThreeSeconds</b> termine de ejecutarse a los tres segundos, osea, hasta que su execution stack no sea completamente ejecutado, durante los 3 segundos los eventos <b>click</b> van a ser puestos en cola para ser ejecutados cuando el engine se desocupe.</p>
+    <p>Cuando corramos este código en la consola y hagamos click sobre la página, lo que vamos a ver es que en la consola no va a imprimirse nada sino hasta que la función <b>waitThreeSeconds</b> termine de ejecutarse a los tres segundos, osea, hasta que
+      su execution stack no sea completamente ejecutado, durante los 3 segundos los eventos <b>click</b> van a ser puestos en cola para ser ejecutados cuando el engine se desocupe.</p>
     <img class="img-custom" src="./media/Synchronous_three.png" alt="">
     <p>A pesar de que hagamos click muchas veces sobre la página, estos clicks no van a ser impresos en consola sino hasta después de que los 3 segundos hayan pasado.</p>
   </section>
   <section>
     <h2>Types and JavaScript</h2>
     <p>Si hemos venido de otro tipo de lenguajes de programación, vamos a ver que en JS los tipos de variable de declaran de una forma diferente.</p>
-      <h3>Dynamic Typing</h3>
-        <p>En JS no le tenemos que decir al engine que tipo de información va a contener la variable, el engine s eencarga de decifrar el tipo de información mientras el código se va ejecutando.</p>
+    <h3>Dynamic Typing</h3>
+    <p>En JS no le tenemos que decir al engine que tipo de información va a contener la variable, el engine s eencarga de decifrar el tipo de información mientras el código se va ejecutando.</p>
   </section>
   <section>
     <h2>Primitive Type</h2>
-    <p>Cómo sabemos JS usa un método que se llama <b>Dynamic Typing</b> y por lo tanto no tenemos que definir el tipo de informació de cada variable sino que el engine lo decifra por si solo, esto no quita que hayan diferentes tipos de datos o información y este tipo de datos se denominan <b>Primitive Types</b>.</p>
-      <h3>Primitive Types</h3>
-      <p>Son tipos de datis que representan un solo valor, mas facil, todo lo que no es un objeto pues un objeto es una colección que puede ser diferentes tipos de información.</p>
-      <ol>
-        <li><b>UNDEFINED:</b> Es inexistencia, una variable que no existe. <b>No debemos asignar este valor a ninguna variable, es solo para uso del engine al momento de crear la memoria para nuestro código.</b></li>
-        <li><b>NULL:</b> También reperesenta inexistencia, este si lo podemos usar para definir una variable igual a nada <code>var a = null;</code></li>
-        <li><b>BOOLEAN:</b> Puede ser o <b>true</b> o <b>false</b> solo uno de los dos <code>var a = true;</code></li>
-        <li><b>NUMBER:</b> En JS solo hay un tipo numerico y siempre es un <b>floating point number</b> o número decimal, aunque se puede volver entero o <b>integer</b> es realmente un decimal.</li>
-        <li><b>STRING:</b> Es una sequencia de caracteres que se encuentran entre comillas simples <b>' '</b> o dobles <b>" "</b>.</li>
-        <li><b>SYMBOL:</b> Es usado en ES6, hablaremos de el en otro momento.</li>
-      </ol>
+    <p>Cómo sabemos JS usa un método que se llama <b>Dynamic Typing</b> y por lo tanto no tenemos que definir el tipo de informació de cada variable sino que el engine lo decifra por si solo, esto no quita que hayan diferentes tipos de datos o información
+      y este tipo de datos se denominan <b>Primitive Types</b>.</p>
+    <h3>Primitive Types</h3>
+    <p>Son tipos de datis que representan un solo valor, mas facil, todo lo que no es un objeto pues un objeto es una colección que puede ser diferentes tipos de información.</p>
+    <ol>
+      <li><b>UNDEFINED:</b> Es inexistencia, una variable que no existe. <b>No debemos asignar este valor a ninguna variable, es solo para uso del engine al momento de crear la memoria para nuestro código.</b></li>
+      <li><b>NULL:</b> También reperesenta inexistencia, este si lo podemos usar para definir una variable igual a nada <code>var a = null;</code></li>
+      <li><b>BOOLEAN:</b> Puede ser o <b>true</b> o <b>false</b> solo uno de los dos <code>var a = true;</code></li>
+      <li><b>NUMBER:</b> En JS solo hay un tipo numerico y siempre es un <b>floating point number</b> o número decimal, aunque se puede volver entero o <b>integer</b> es realmente un decimal.</li>
+      <li><b>STRING:</b> Es una sequencia de caracteres que se encuentran entre comillas simples <b>' '</b> o dobles <b>" "</b>.</li>
+      <li><b>SYMBOL:</b> Es usado en ES6, hablaremos de el en otro momento.</li>
+    </ol>
   </section>
   <section>
     <h2>Operators</h2>
     <p>Un operador es una función que es sintacticamente escrita de manera distinta. Los operadores generalmente reciben un parametro y devuelven dos</p>
-    <p>Cuando usamos un operador <b>+, -, >, <, etc</b> lo que realmente estamos usando es una función que ha sido pre escrita para que nosotros podamos usar los operadores más rapidamente, en lugar de tener por ejemplo que escribir: <code> function suma(a, b){return a + b}</code> lo que hacemos es <code>a + b</code>, lo mismo sucede con todos los operadores</p>
+    <p>Cuando usamos un operador <b>+, -, >, <, etc</b> lo que realmente estamos usando es una función que ha sido pre escrita para que nosotros podamos usar los operadores más rapidamente, en lugar de tener por ejemplo que escribir: <code> function suma(a, b){return a + b}</code>      lo que hacemos es <code>a + b</code>, lo mismo sucede con todos los operadores</p>
   </section>
   <section>
     <h2>Operator Precedence and Associativity</h2>
@@ -188,11 +208,46 @@
     <p>Este documento es importante porque nos muestra los valores de precedencia que tiene cada operador y además nos muestra la asociatividad o dirección en que operdaores iguales son evaluados.</p>
     <p>Qeu pasa si tenemos lo siguiente:</p>
     <img class="img-custom" src="./media/Operator_Precedence.png" alt="">
-    <p>Si alguna vez en nuestras vidas tuvimos clase de matematicas, sabemos que la multiplicación va primero y por lo tanto el resultado es 15. Si vemos la tabla de precedencia veremos que el valor que tiene la multiplicación es 14 mientras que suma tiene un valor de precedencia de 13, los mayores ganan!</p>
+    <p>Si alguna vez en nuestras vidas tuvimos clase de matematicas, sabemos que la multiplicación va primero y por lo tanto el resultado es 15. Si vemos la tabla de precedencia veremos que el valor que tiene la multiplicación es 14 mientras que suma tiene
+      un valor de precedencia de 13, los mayores ganan!</p>
     <p>Y ahora que pasa si tenemos oo siguiente:</p>
     <img class="img-custom" src="./media/Operator_Precedence_two.png" alt="">
     <p>Que vamos a ver en la consola?</p>
-    <p>Para saberlo tenemos que ver el sentido de asociatividad que tiene la igualdad <b>=</b>, en la tabla vemos que es de <b>derecha a izquierda</b> lo que quiere decir que primero se definen los de la derecha que en nuestro caso será <code> b = c </code> o en otras palabras, <b>b</b> es igual a <b>c</b>, <b>c</b> es 4 y por lo tanto <b>b</b> será 4. <b>a</b> será lo que es <b>b</b> y como en este punto <b>b</b> ya es 4, entonces <b>a</b> es también igual a 4.</p>
+    <p>Para saberlo tenemos que ver el sentido de asociatividad que tiene la igualdad <b>=</b>, en la tabla vemos que es de <b>derecha a izquierda</b> lo que quiere decir que primero se definen los de la derecha que en nuestro caso será <code> b = c </code>      o en otras palabras, <b>b</b> es igual a <b>c</b>, <b>c</b> es 4 y por lo tanto <b>b</b> será 4. <b>a</b> será lo que es <b>b</b> y como en este punto <b>b</b> ya es 4, entonces <b>a</b> es también igual a 4.</p>
+  </section>
+  <section>
+    <h2>Coercion</h2>
+    <p>En JS coercer u obligar se refiere la acción que genera el engine en algunos momentos sobre algunos valores, lo que hace JS es convertir su tipo de valor a otro tipo de valor. <br> Por ejemlpo tenemos lo siguiente <code>var a = 1 + '5'</code> como
+      vemos uno de los valores es declarado cómo un número y el otro como un string, cuando mostramos el resultado en la consola veremos un <code>12</code>. Esto sucede porque el otro es un string y por lo tanto el engine convertirá el número en un string
+      para buscar darle un resultado coherente al usuario.</p>
+  </section>
+  <section>
+    <h2>Comparison Operator - Operadores de comparasión</h2>
+    <p>Muchas veces usamos operadores de comparación y aunque creemos que tenemos claro el resultado que nos va a arrojar en algunas ocasiones nos podemos sorprender (a mi me sucedió) para comenzar, veamos el siguiente ejemplo: <code>1 &lt; 2 &lt; 3</code>      en engine en este ejemplo nos va a arrojar <code>true</code> lo que en realidad tiene sentido porque 1 es menor a dos y dos es menor que 3.</p>
+    <p>Ahora intentemos lo siguiente: <code> 3 &gt; 2 &gt; 1</code> que vemos en la consola??</p>
+    <img class="img-custom" src="./media/coercion_one.png" alt="">
+    <p>Vemos <b>false</b> por que? si 3 es mayor que 2 y 2 es mayor que 1? <br>Si vamos a mirar el documento que nos habla sobre la precedencia en los operadores <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence">aquí el link de nuevo</a>      vemos que el operador <code>&gt;</code> es analizado por el engine de izquierda a derecha, entonces que pasa?</p>
+    <img class="img_custom" src="./media/coercion_two.png" alt=""><br>
+    <p>Pues lo que sucede es que primero se evalúa la primera expresión <code>3 &gt; 2</code> que dá como resultado el boolean <code>true</code> quedando la expresión <code>true &gt; 1</code> por ser evaluada. Pero que pasa aquí? pues bueno, como sabemos
+      el engine va hacer lo posible por dar un resultado coherente y en este caso va a transformar el valor del boolean true por el número 1 dejando la siguiente expresión <code>1 &gt; 1</code> y como sabemos 1 <b>no</b> es mayor que 1 y el resultado
+      va a ser <b>false</b>.</p>
+    <p>Así como el engine cambia el valor de true a 1, hay muchas otras combinaciones y cambios que pueden terminar dando un reultado diferente, aquí no vamos a profundizar en este punto pero si es importante tener claro que el operador <code>==</code> nos
+      resuelve igualdad por ejemplo: <code>3 == '3' = true</code> en caso de que uno de los dos valores sea de un 'tipo' diferente entonces será cambiado (la mayoría de las veces) para que la operación tenga un resultado.</p>
+    <p>Por otro lado tenemos el operador <code>===</code> que nos resuelve una <b>igualdad estricta</b> por lo tanto <code> 3 === '3' = false</code> y <code>3 === 3 = true</code> ningún valor es cambiado, solo se devuelve true si es una igualdad completamente
+      estricta.</p>
+  </section>
+  <section>
+    <h2>Booleans Existence</h2>
+    <p>Es importante saber que la falta de existencia como <b>undefined, null o ""</b> son evaluados como booleans <b>false</b> sabiendo esto podemos usar esta evaluación a nuestro favor, siempre que usamos las declaraciones condicionales (conditional statements) <b>if</b> lo que se encuentra dentro de la condición siempre va a buscar ser evaluado como un boolean, por ejemplo:</p>
+    <img class="img_custom" src="./media/existence_boolean_one.png" alt="./media/existence_boolean_one.png">
+    <p>Cuando ejecutamos esta declaración en la consola nada va a ser impreso, por que? porque a la variable <b>a</b> no se le ha dado ningún valor y como sabemos, en la fase de creación a todas las variables se les asigna por el engine el valor de <b>undefined</b> el cual al ser evaluado como boolean nos da el valor de <b>false</b>.</p>
+    <h3>0 también es false</h3>
+    <p>Es importante tener en cuenta que el valor <b>0</b> también es evaluado como falso por el engine y 0 no tiene que significar inexistencia, eso depende de nuestro código y que queremos que haga, entonces is por alguna razón el valor de la variable llega a tener el valor de 0 pero lo que queremos es evaluar su existencia (undefined, null, '') es posible que tengamos un resultado diferente al que esperamos, en este casos podríamos ajustar mejor la condición de esta manera: <code>(a || a === 0)</code>, así si la primera condicion es inexistente incluyendo 0, será evaluada como false, pero la segunda será true porque <b>a</b> será en nuestro ejemplo igual a <b>0</b> por lo tanto la condición será evaluada como true <code>false||true</code> da como resultado <code>true</code>.</p>
+  </section>
+  <section>
+    <h2>Default Values</h2>
+    <p>Una forma interesante de asignar valores por defecto es mediante el uso de <code>||</code></p>
   </section>
 </body>
+
 </html>
