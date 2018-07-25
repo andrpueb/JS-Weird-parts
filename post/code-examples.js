@@ -92,6 +92,67 @@ true > 1
 //Existence and booleans
 
 var a;
+//a no ha sido definida
 if(a){
     console.log('hay algo dentro de a')
 }
+
+//Using Object Literal
+
+var carro = {
+  marca: 'Lamborghini',
+  modelo: 'Murcielago',
+  país: 'Italia'
+}
+
+//Es lo mismo que --->
+
+var carro = new Object();
+carro.marca = 'Lamborghini';
+carro.modelo = 'Murcielago';
+carro.pais = 'Italia';
+
+//namesapce emulation
+
+var ferrari = {};
+var renault = {};
+var nissan = {};
+
+ferrari.puertas = 2;
+renault.puertas = 5;
+nissan.puertas = 3;
+
+
+//Object Literal
+
+var jugador = {
+    nombre: 'James',
+    apellido: 'Rodriguez',
+    edad: 26
+}
+
+//JSON - Javascript object notation
+
+{
+  'nombre': 'james',
+  'apellido':'Rodriguez',
+  'edad': 26
+}
+
+//JSON.stringify
+
+var myObjeto = {
+  primeraPropiedad : 'un valor',
+  segundaPropiedad : 'otro valor'
+}
+
+var myObjetoJSON = JSON.stringify(myObjeto)
+
+//JSON.parse
+
+var myJSON = {
+  "unaPropiedad" : "el valor de una propiedad",
+  "otraPropiedad" : "el valor de otra propiedad"
+}
+
+var myObjetoLiteral = JSON.parse(myJSON);

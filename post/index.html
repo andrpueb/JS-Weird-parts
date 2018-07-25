@@ -134,7 +134,8 @@
     <p>Tambien vimos que cuando un contexto de ejecución es creado una de las cosas que también es creada para nuestro uso es el <b>Outer Environment</b> o entorno externo, esto es sencillamente una referencia a su enteorno externo mas próximo, veamos: </p>
     <img src="./media/outer_environment_one.png" alt="">
     <p>En este ejemplo tenemos dos funciones declaradas y declaramos la variable <b>myVar</b> en el contexto global y dentro del contexto de la función <b>a</b>. Dentro de la función <b>b</b> buscamos imprimir en consola el valor de <b>myVar</b> que valor
-      veremos?</p>
+      veremos?
+    </p>
     <p>Aquí debemos tener en cuenta lo que se denomina como <b>Lexical Environment</b> que se refiere al entorno dependiendo de donde ha sido la función o la variable fisicamente declarada, y como fisico nos referimos a su posición de acuerdo al resto de
       declaraciones, el lugar en que hayamos escrito nuestra función.</p>
     <img class="img-custom" src="./media/outer_environment_two.png" alt="">
@@ -234,19 +235,101 @@
     <p>Así como el engine cambia el valor de true a 1, hay muchas otras combinaciones y cambios que pueden terminar dando un reultado diferente, aquí no vamos a profundizar en este punto pero si es importante tener claro que el operador <code>==</code> nos
       resuelve igualdad por ejemplo: <code>3 == '3' = true</code> en caso de que uno de los dos valores sea de un 'tipo' diferente entonces será cambiado (la mayoría de las veces) para que la operación tenga un resultado.</p>
     <p>Por otro lado tenemos el operador <code>===</code> que nos resuelve una <b>igualdad estricta</b> por lo tanto <code> 3 === '3' = false</code> y <code>3 === 3 = true</code> ningún valor es cambiado, solo se devuelve true si es una igualdad completamente
-      estricta.</p>
+      estricta.
+    </p>
   </section>
   <section>
     <h2>Booleans Existence</h2>
-    <p>Es importante saber que la falta de existencia como <b>undefined, null o ""</b> son evaluados como booleans <b>false</b> sabiendo esto podemos usar esta evaluación a nuestro favor, siempre que usamos las declaraciones condicionales (conditional statements) <b>if</b> lo que se encuentra dentro de la condición siempre va a buscar ser evaluado como un boolean, por ejemplo:</p>
+    <p>Es importante saber que la falta de existencia como <b>undefined, null o ""</b> son evaluados como booleans <b>false</b> sabiendo esto podemos usar esta evaluación a nuestro favor, siempre que usamos las declaraciones condicionales (conditional statements)
+      <b>if</b> lo que se encuentra dentro de la condición siempre va a buscar ser evaluado como un boolean, por ejemplo:</p>
     <img class="img_custom" src="./media/existence_boolean_one.png" alt="./media/existence_boolean_one.png">
-    <p>Cuando ejecutamos esta declaración en la consola nada va a ser impreso, por que? porque a la variable <b>a</b> no se le ha dado ningún valor y como sabemos, en la fase de creación a todas las variables se les asigna por el engine el valor de <b>undefined</b> el cual al ser evaluado como boolean nos da el valor de <b>false</b>.</p>
+    <p>Cuando ejecutamos esta declaración en la consola nada va a ser impreso, por que? porque a la variable <b>a</b> no se le ha dado ningún valor y como sabemos, en la fase de creación a todas las variables se les asigna por el engine el valor de <b>undefined</b>      el cual al ser evaluado como boolean nos da el valor de <b>false</b>.</p>
     <h3>0 también es false</h3>
-    <p>Es importante tener en cuenta que el valor <b>0</b> también es evaluado como falso por el engine y 0 no tiene que significar inexistencia, eso depende de nuestro código y que queremos que haga, entonces is por alguna razón el valor de la variable llega a tener el valor de 0 pero lo que queremos es evaluar su existencia (undefined, null, '') es posible que tengamos un resultado diferente al que esperamos, en este casos podríamos ajustar mejor la condición de esta manera: <code>(a || a === 0)</code>, así si la primera condicion es inexistente incluyendo 0, será evaluada como false, pero la segunda será true porque <b>a</b> será en nuestro ejemplo igual a <b>0</b> por lo tanto la condición será evaluada como true <code>false||true</code> da como resultado <code>true</code>.</p>
+    <p>Es importante tener en cuenta que el valor <b>0</b> también es evaluado como falso por el engine y 0 no tiene que significar inexistencia, eso depende de nuestro código y que queremos que haga, entonces is por alguna razón el valor de la variable
+      llega a tener el valor de 0 pero lo que queremos es evaluar su existencia (undefined, null, '') es posible que tengamos un resultado diferente al que esperamos, en este casos podríamos ajustar mejor la condición de esta manera: <code>(a || a === 0)</code>,
+      así si la primera condicion es inexistente incluyendo 0, será evaluada como false, pero la segunda será true porque <b>a</b> será en nuestro ejemplo igual a <b>0</b> por lo tanto la condición será evaluada como true <code>false||true</code> da como
+      resultado <code>true</code>.</p>
   </section>
   <section>
     <h2>Default Values</h2>
-    <p>Una forma interesante de asignar valores por defecto es mediante el uso de <code>||</code></p>
+    <p>Una forma interesante de asignar valores por defecto es mediante el uso de <code>||</code> por ejemplo podemos decir <code>nombre = nombre || 'no hay nombre'</code>, como sabemos el operador <b>or</b> evalúa las condiciones buscando convertirlas en
+      booleanos, así el primoer que resulte <b>true</b> será el valor que se asignará, en este caso si <b>nombre</b> resulta falso ej: <b>undefined, null, false o 0</b> entonces la segunda será evaluada, el engine la convertirá u obligará a ser booleano
+      y como la segunda condición es un string no vacío, entonces será <b>true</b> y el valor que se le asignará a la variable <b>nombre</b> será <em>no hay nombre</em>.</p>
+  </section>
+  <section>
+    <h2>FRAMEWORK ASIDE:Default Values</h2>
+    <p>Es muy probable que en algún momento queramos usar diferentes frameworks o librerias en un mismo proyecto y también es posible que estas usen el contexto global para declarar variable y podría suceder que la declaración de variables colisione, en
+      estos caso es muy probable que veamos cosas así: <code>window.nombreDeVariable = window.nombreDeVariable || 'otro valor'</code> lo que se logra con esta verificación es que no se sobreescriban valores que ya existen o variables que ya están declaradas
+      y definidas, como ya vimos esto significa: <em>Si la variable ya existe entonces no la modifique <b>pero si no existe</b> cambiela por este nuevo valor que le estoy dando.</em></p>
+  </section>
+  <section>
+    <h2>Objects and Functions</h2>
+    <p>Como ya vimos antes los objetos se pueden componer de variables primitivas como numeros o string, también puede contener otros objetos o también pueden contener método que en realidad son funciones que devuelven algún valor.</p>
+    <h3>Cómo creamos lo objetos?</h3>
+    <p>En realidad podemos crerar un objeto de diferentes formas, resumidas son las siguientes:</p>
+    <ul>
+      <li>Object literal: Es a través del uso de los corchetes o curly braces <br>
+        <code>var carro = { marca: 'Ferrari, modelo: 1989, modelo: Testarossa' }</code>
+      </li>
+      <li>También lo podemos hacer a través del constructor Object() <br>
+        <code>var carro = new Object()</code>
+      </li>
+      <li>Podemos usar una función constructora <br>
+        <code>var Obj = function(name){ <br>
+          this.name = name
+        } <br>
+        var miCarro = new Obj('Mi Nave');
+      </code>
+      </li>
+    </ul>
+    <h3>Acceder a los objetos y agregar propiedades</h3>
+    <p>Cómo vimos antes, con lo corchetes o curly braces podemos declarar un objeto y además decalarar propiedades al mismo tiempo, agregar propiedades se puede hacer de multiples formas así como acceder a ellas</p>
+    <ul>
+      <li> <b>Con parentesis cuadrados [ ]</b> - tenemos el objeto carro ya declarado y declaramos la propiedad marca -
+        <code>carro['marca'] = "Alfa Romeo"</code>
+        Para acceder a la marca hacemos lo siguiente:
+        <code>carro[marca]</code>
+      </li>
+      <li><b>Con la notacion punto .</b> - funciona igual que los brackets ya cuando tenemos un objeto declarado, para agregar una propiedad al objeto carro:
+          <code>carro.marca = 'Tesla'</code>
+          Para conocer el valor de la propiedad marca del objeto carro:
+          <code>carro.marca</code>
+      </li>
+    </ul>
+    <p>También podemos crerar objetos dentro de objetos de la misma usando el mismo principio</p>
+    <code>vehiculo.carro.marca = 'Audi'</code>
+    <p>Y accedemos de la misma forma:</p>
+    <code>vehiculo.carro.marca</code>
+  </section>
+  <section>
+    <h2>Objects and Object Literals</h2>
+    <p>Cuando hablamos de objetos anteriormente nos referimos la forma de crear objetos mediante <code>new Object()</code> y mediante <code>{ }</code> bueno, en realidad el uso de los corchetes es simplemente un atajo para hacer lo mismo y se le llama <b>Object Literal</b> y como vimos también podemos inicializarlo al mismo tiempo agregandole propiedades:</p>
+    <img class="img_custom" src="./media/object_literal_one.png" alt="">
+    <p></p>
+  </section>
+  <section>
+    <h2>FRAMEWORK ASIDE: Faking Namespaces</h2>
+    <p><b>Namespace:</b> A container for variables and functions, typically to keep variables and functions with the same name separate.</p>
+    <p>Los namespaces en los lenguajes de programación se refieren a un container que contiene un grupo único de identificadores y simbolos, en JS no los tenemos pero los podemos emular con el uso de objetos. <br>
+    Por ejemplo queremos hacer uso de una variable que tenga un mismo nombre para diversos objetos, como lo vimos ahora con el objeto carro, es muy probable que queramos tener varios carros pero cada uno con diferentes caracteristicas aunque mismas propiedades (marca, no de puertas, etc):
+    </p>
+    <img class="img_custom" src="./media/namespace.png" alt="">
+    <p>De esta forma podemos tener el mismo nombre de variable que pertenece a un objeto diferente.</p>
+  </section>
+  <section>
+    <h2>JSON and Object Literals</h2>
+    <p>Si hemos visto anteriormente la forma en la que se escribe JSON y vemos la forma en que se escribe un Object Literal vamos darnos cuenta que son muy similares:</p>
+    <img class="img_custom" src="./media/object_literal_vs_json.png" alt="">
+    <p>Cómo vemos son muy parecidos y lo que cambia son las comillas en los nombres de las propiedades. JSON es un formato muy util para compartir información y JS por medio de un par de funciones nos permite pasar la información de JSON a Object Literal y viceversa.</p>
+    <p><b>JSON.stringify</b> nos permite pasar de Object literal a JSON:</p>
+    <img class="img_custom" src="./media/stringify.png" alt="">
+    <p><b>JSON.parse</b> nos permite pasar de JSON a Object Literal:</p>
+    <img class="img_custom" src="./media/jsonParse.png" alt="">
+  </section>
+    <h2>Las Funciones son Objetos!</h2>
+    <p></p>
+  <section>
+
   </section>
 </body>
 
