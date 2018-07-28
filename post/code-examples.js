@@ -156,3 +156,46 @@ var myJSON = {
 }
 
 var myObjetoLiteral = JSON.parse(myJSON);
+
+//by Value (primitives)
+
+var a = 3;
+var b;
+
+b = a;
+
+//by Reference (objects)
+
+var a = {saludo: 'hola'};
+var b;
+
+a = b;
+
+a.saludo = 'heyy';
+
+console.log(a);
+console.log(b);
+
+// asignar nuevo objeto
+
+var e = {color: 'azul'}
+var f = e;
+
+//Ahora le asignamos a 'e' un objeto diferente
+
+e = {color: 'morado'}
+
+
+
+//this
+function a(){
+  console.log(this)
+}
+
+var b = function(){
+  console.log(b)
+}
+
+
+a()
+b()

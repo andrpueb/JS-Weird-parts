@@ -326,10 +326,48 @@
     <p><b>JSON.parse</b> nos permite pasar de JSON a Object Literal:</p>
     <img class="img_custom" src="./media/jsonParse.png" alt="">
   </section>
+  <section>
     <h2>Las Funciones son Objetos!</h2>
     <p></p>
+  </section>
   <section>
-
+    <h2>CONCEPTUAL ASIDE: By Value vs by Reference</h2>
+    <p>Este es un concepto que debemos tener claro. Cuando asignamos a una variable un <b>valor primitivo</b> como un numero on un string, se asigna un espacio en la memoria que contiene ese valor y una dirección que permite que la variable apunte a ese valor <code>a = 3;</code>. Si asignamos esa variable a otra variable <code>b = a;</code> como el valor de <b>a</b> es un primitivo, entonces, se asignará un nuevo espacio en memoria para <b>b</b>que contendrá una dirección diferente que apunte a su valor, en resumen en memoria habrá en un comienzo y de acuerdo a nuestro ejemplo una variable <b>a</b> y otra <b>b</b> y cada una apuntará a un valor <b>3</b> completamente diferente e independiente ubicados en una dirección en la memoria completamente distint.</p>
+    <img class="img_custom" src="./media/by_value.png" alt="">
+    <p>Esto lo podemos probar de la siguiente manera:</p>
+    <img src="./media/byValue_test.png" alt="">
+    <p>Aunque <b>b</b> haya sido declarada con el valor de <b>a</b> aunque cambiemos el valor de <b>a</b> el valor de <b>b</b> no cambia.</p>
+    <p>Con los Objetos pasa algo distinto, si al objeto <b>c</b> le asignamos el objeto <b>d</b> entonces cuando modifiquemos (también se dice <b>mutar</b> en programación) el objeto <b>c</b>, este cambio también se verá reflejado en el objeto <b>d</b>, esto sucede porque a diferencia de lo que pasa con las valores primitivo, en los objetos se crea una <b>Referencia</b> al objeto y NO se crea un objeto nuevo como pasa con los primitivos. Osea que tenemos dos variables que apuntan a una misma direcció en la memoria.</p>
+    <img src="./media/by_reference.png" alt="">
+    <p>Lo probamos con el siguiente ejemplo:</p>
+    <img src="./media/byReference_test.png" alt="">
+    <p>Aunque cambiamos solamente el objeto <b>c</b> vemos que el valor de la propiedad país cambió en los dos objetos, el mismo principio aplica así pasemo el objeto como un parametro dentro de una función</p>
+    <img src="./media/byReferenceFunc.png" alt="">
+    <p><b>Importante!</b> el simbolo asignación o igual (=) es el que define si un elemento se crea o no en la memoria, en caso de que el Objeto asignado no se encuentre ya en la memoria, entonces será creado en una nueva ubicación, hay que tener esto claro poque si por ejemplo tenemos:</p>
+    <img src="./media/objetoAsignarNuevo.png" alt="">
+    <p>A pesar de que en un inicio las dos variables apuntaban a un mismo objeto, al una de las variables ser asignada a un objeto distinto, este nuevo objeto es creado en memoria y solo la variable al que ha sido asignado apuntará a su ubicació en memoria.</p>
+  </section>
+  <section>
+    <h2>Objects, functions and 'this'</h2>
+    <p>Seguramente hemos visto el uso de <b>this</b> en algún código o lo hemos usado nosotros mismos, pues bueno, seguramente lo vamos a ver muchas veces mas porque se usa con bastante frecuencia, pero bueno, que es <b>this</b>?</p>
+    <p>Generalmente se piensa que <b>this</b> hace referencia al contexto desde donde se invoca como una función o un objeto, pues bueno si aún lo creemos así debo decirles que NO es correcto, pues <b>this</b> hace solamente referencia al contexo principal de un Objeto y no de una función, ya sé que dijimos que las funciones son objetos pero son objetos especiales, son objetos de primera clase que tienen 'poderes' especiales por decirlo de alguna manera. En resumen, <b>THIS hace referencia al primer nivel del contexto de un Objeto (no funciones)</b> lo demostramos de la siguiente forma:</p>
+    <p>Mostremos en la console en el contexto global el valor de <b>this</b>:</p>
+    <img src="./media/this_one.png" alt="">
+    <p>Nos devuelve el contenido del contexto global que es Window</p>
+    <p>Ahora dentro de una función mostremos en consola el valor de <b>this</b>:</p>
+    <img src="./media/this_two.png" alt="">
+    <p>Seguimos viendo el contenido del objeto global Window a pesar de que estamos dentro de una función.</p>
+    <p>Ahora, dentro de un Objeto creemos un metodo que imprima en consola el valor de <b>this</b>:</p>
+    <img src="./media/this_three.png" alt="">
+    <p>Ahora vemos que el valor mostrado en la consola es el objeto dentro del que se encuentra el método y NO el contexo global, esto nos demuestra que <b>this</b> lo podemos usar principalmente dentro de los objetos si es que queremos referirnos al contenido de ese objeto de alguna manera, en nuestro ejemplo podemos cambiar la marca de nuestro carro refiriendonos a <b>this</b>:</p>
+    <img src="./media/this_four.png" alt="">
+    <p><b>Importante!</b> que pasa si dentro de un método tenemos otra función que busca hacer uso del contenido del objeto mediante <b>this</b>? Lo primero que pensamo de acuerdo a lo que vimos es que <b>this</b> dentro de un objeto hace referencia al objeto en el que se encuentra, eso lo pensamos muchos y a lo mejor no estaría mal que fuera así, de hecho seríá hasta lógico pero <b>NO ES ASÍ</b> cuando creamos una función dentro de un método, y esta función hace uso de <b>this</b> el contexto al que se hace referencia es de nuevo el contexto <b>global</b>:</p>
+    <img src="./media/this_five.png" alt="">
+    <p>En el ejemplo anterior vemos como al tratar de imprimir en consola el contenido de <b>this</b> mediante una función que se encuentra dentro de un método lo que muestra la consola es el contenido del contexto global o Window. Una solución común para estos casos es crear una variable dentro del Objeto que haga referencia a <b>this</b> esta variable es muchas veces llamada <b>self</b>.</p>
+      <h3>self</h3>
+      <p>Esta es una variable que se crea dentro del objeto y que resuelve el comportamiento de <b>this</b> dentro de funciones creadas dentro de los método. Cómo ya vimos antes, cuando declaramos una variable y le asignamos un objeto, lo que hace el engine es crear una referencia hacia el objeto, por lo tanto podemos hacer <code>self = this</code> aquí un ejemplo:</p>
+      <img src="./media/this_six.png" alt="">
+      <p>Ahora vemos que la referencia del objeto se ha mantenido y que el objeto impreso en la consola es el mismo objeto en el que se encuentra la función.</p>
   </section>
 </body>
 
