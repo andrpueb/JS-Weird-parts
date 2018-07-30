@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="./style.css">
   <link href="https://fonts.googleapis.com/css?family=Arsenal" rel="stylesheet">
+  <link rel="stylesheet" href="http:////cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
   <title>JS weird parts</title>
 </head>
 
@@ -372,7 +375,120 @@
   <section>
     <h2>ARRAYS: Collections of anything</h2>
     <p>En JS a diferencia de otros lenguajes de programación, podemos poner lo que queramos en un array y combinarlo como queramos, podemos tener en un mismo array <b>objetos, funciones, primitivos</b> lo que queramos, por ejemplo:</p>
-    <img src="" alt="">
+    <img src="./media/array_one.png" alt="">
+    <p>Tenemos un array que contiene un numero, una función y un objeto y esto es perfectamente válido porque es permitido por el engine de JS. Además podemos hacer uso de los elementos de los arrays o colecciones como mejor nos parezca, por ejemplo podemos usar en este caso la función y el contenido del objeto para imprimir algo en la consola:</p>
+    <img src="./media/array_two.png" alt="">
+  </section>
+  <section>
+    <h2>'arguments' and SPREAD</h2>
+    <p>Argumentos son aquellos valores o parámetros que le pasamos a una función con el fin de que de alguna forma los procese, por ejemplo:</p>
+    <pre><code>
+      function mifuncion(argumentos){
+        //dentro de la función hago uso de los argumentos
+      }
+    </code></pre>
+    <p>>Es probable que otros lenguajes de programación nos devuelvan errores cuando la función invocada no contiene todos los argumentos que en un inicio fueron declarados con la función, JS no nos devuelve ningún error, lo que si va devolver es el valor 'undefined' pues la variable fue declarada pero nunca asignada.</p>
+    <p>JS contiene dentro de las funciones una variable que se llama <b>arguments</b> y que lo que hace es devolver el valor de los argumentos pasados a la función en una <em>especie de array</em> que no es en realidad un array porque no cotiene los métodos que contiene un array como pop, unshift, solo tiene el método <em>length</em> que nos devuelve el largo del array y bueno también podemos devolver el contenido de acuerdo a su ubicación dentro del array e.g: <code>array[2]</code>.</p>
+    <p>Aquí hacemos uso de la variable <b>arguments:</b></p>
+    <pre><code>
+      function myCasa(cuartos, banos, jardines){
+        console.log('Mi casa tiene '+banos+' baños '+cuartos+' cuartos y '+jardines+' jardines');
+        console.log(arguments);
+      }
+
+      myCasa(3, 2, 2)
+    </code></pre>
+    <p>Ahora corremos en consola:</p>
+    <img src="./media/arguments_one.png" alt="">
+    <p>Parece ser que <em>arguments</em> va a dejarse a un lado en un futuro y se usarán otros métodos que son parte de ES6.</p>
+  </section>
+  <section>
+    <h2>FRAMEWORK ASIDE: Function Overloading</h2>
+    <p>En JS no hay function overloading cómo en otros lenguajes</p>
+  </section>
+  <section>
+    <h2>CONCEPTUAL ASIDE: Syntax Parsers</h2>
+    <p></p>
+  </section>
+  <section>
+    <h2>DANGEROUS ASIDE: Automatics Semicolon Insertion</h2>
+    <p>El Engine de JS va analizando caractér por caractér todo el syntax del código que escribimos y de acuerdo a lo que va viendo va tomando decisiones para ejecutar tareas, pues bueno, dentro de las acciones que toma el Engine es la de agregar automaticamente los punto y coma ; (semicolon en inglés) faltantes en nuestro código lo que hace que de alguna manera no sea obligatorio escribirlos y generalmente nuestro código funciona como esperamos. Pero esto no siempre sucede y es probable que el Engine nos inserte un punto y coma en donde no queremos y que al final el resultado que esperamos de nuestro programa, por esto es importante tener buenos habitos al momento de escribir código.</p>
+    <p>Veamos el ejemplo siguiente:</p>
+    <pre><code>
+      function juego(){
+        //nuestro código
+        return    //pasamos a la linea de abajo
+        {
+          personaje : 'Zelda'
+        }
+      };
+      console.log(juego());
+
+    </code></pre>
+    <p>Viendo el código anterior seguramente pensemos que al ejecutar el código vamos a ver en la consola el valor del objeto que debe ser devuelto por la función <code>{personaje : 'Zelda'}</code> pero lo corremos y vemos lo siguiente: </p>
+    <img src="./media/semicolon_insertion_one.png" alt="">
+    <p>Nos devuelve <b>undefined</b> pero por que? pues bueno, este es el resultado de la inserción automatica de punto y coma del engine, al ver que seguido del método <code>return</code> venía un retorno de carro (carriage return en ingles) o Enter para pasar a la linea de abajo, pues el <em>Engine</em> asumió que debía insertar un punto y coma por lo tanto la función no devolvió nada porque terminó en <code>return;</code> por esta razón es mejor siempre evitar cambios de linea innecesarios y escribir los puntos y comas así no sea del todo obligatorio, nos evitamos problemas y perder muchisimo tiempo buscando errores en nuesctro código que como estos pueden ser muy dificiles de encontrar.</p>
+    <p>Ahora probemos la siguiente función y vemos como SI nos devuelve lo que estamos esperando:</p>
+    <pre><code>
+      function juego(){
+          //nuestro código
+          return { //continuamos escribiendo sobre la misma linea
+            personaje : 'Zelda'
+          };
+      }
+      console.log(juego());
+    </code></pre>
+  </section>
+  <section>
+    <h2>FRAMEWORK ASIDE: Whitespace</h2>
+
+  </section>
+  <section>
+    <h2>Immediately Invoked Function Expressions (IIFE)</h2>
+    <p>Son funciones que como su nombre lo dice se invocan de inmediato, osea que no tenemos que invocarlas en una linea aparte. Generalmente cuando tenemos una función hacemos lo siguiente:</p>
+    <pre><code>
+      //Function expression
+        function saludar(nombre){
+          console.log('Hola ' + nombre +' cómo estás?')
+        }
+        saludar('Hector') //invocamos la función
+
+      //Function declaration
+        var saludar = function(nombre){
+          console.log('Hola ' + nombre +' cómo estás?')
+        }
+        saludar('Juan'); //Invocamos la función
+    </code></pre>
+    <p>Cómo sabemos la única forma de que estás funciones sean ejecutadas es invocandolas después de haberlas declarado en una linea aparte y para invocarlas usamos el nombre y los parentesis e.g. <code>saludar()</code>, las <b>IIFE</b> son funciones que básicamente se invocan a ellas mismas al momento de ser declaradas, veamos el siguiente ejemplo:</p>
+    <pre><code>
+      var nombre = function (nombre){
+        return nombre;
+      }('Juan') // Agregamos los parentesis al final de la función para que se invoque de inmediato y le podemos pasar argumentos si queremos
+
+      var saludar = function (){
+        console.log('Hola ' + nombre + ' cómo estás?') //solo hacemos referencia al nombre de la funcione sin necesidad de invocarla
+      }
+
+      saludar()
+    </code></pre>
+    <p>Al ejecutarse de inmediato ya no tenemos que invocarla de nuevo sino que solo usamos su nombre pues ya en este momento se ha ejecutado y el valor de función <em>nombre</em> para nuestro ejemplo es un <em>string</em>.</p>
+    <p>También simplemente podemos crear una función que sin necesaidad de ni siquiera hacer referencia a su nombre podemos hacer que se ejecute tan pronto como sea leída por el engine, lo hacemos de la siguiente forma:</p>
+    <pre><code>
+      (function(nombre){  //Iniciamos la función con un parentesis
+        var saludar = 'Hola '+ nombre;
+        console.log(saludar + ' te saludo desde adentro de la IIFE')
+      }('Carolina'))//También le podemos pasar argumentos si queremos
+
+      //O le podemos pasr argumentos que se encuentren disponibles al momento de ser invocadas
+
+      var visitante = 'Adriana'; //Variable disponible
+
+      (function(nombre){  //Iniciamos la función con un parentesis
+        var saludar = 'Hola '+ nombre;
+        console.log(saludar + ' te saludo desde adentro de la IIFE');
+      }(visitante))  //pasamos la variable
+    </code></pre>
+
   </section>
 </body>
 

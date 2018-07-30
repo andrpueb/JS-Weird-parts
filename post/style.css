@@ -1,5 +1,5 @@
 section img{
-  max-width: 500px;
+  max-width: 80vw;
   margin-bottom: 20px;
 }
 body{
@@ -7,9 +7,10 @@ body{
   max-width: 80vw;
   font-family: 'Arsenal', sans-serif;
 }
-code{
+/*code{
   border: #FF2D00 1px solid;
   padding: 1px 2px;
   border-radius: 2px;
   color: #0080A4;
 }
+*/

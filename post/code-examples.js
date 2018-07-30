@@ -203,8 +203,8 @@ b()
 
 var miArray = [
   3,
-  function(){
-    console.log()
-  }
-
+  function(carro){
+    console.log('yo tengo un ')
+  },
+  {carro: 'Porsche'}
 ]
