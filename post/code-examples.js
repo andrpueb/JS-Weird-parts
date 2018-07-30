@@ -196,6 +196,15 @@ var b = function(){
   console.log(b)
 }
 
-
 a()
 b()
+
+//ARRAYS
+
+var miArray = [
+  3,
+  function(){
+    console.log()
+  }
+
+]
