@@ -476,8 +476,8 @@
     <pre><code>
       (function(nombre){  //Iniciamos la función con un parentesis
         var saludar = 'Hola '+ nombre;
-        console.log(saludar + ' te saludo desde adentro de la IIFE')
-      }('Carolina'))//También le podemos pasar argumentos si queremos
+        console.log(saludar + ' te saludo desde adentro de la IIFE');
+      }('Carolina')); //También le podemos pasar argumentos si queremos
 
       //O le podemos pasr argumentos que se encuentren disponibles al momento de ser invocadas
 
@@ -486,8 +486,141 @@
       (function(nombre){  //Iniciamos la función con un parentesis
         var saludar = 'Hola '+ nombre;
         console.log(saludar + ' te saludo desde adentro de la IIFE');
-      }(visitante))  //pasamos la variable
+      }(visitante);  //pasamos la variable
     </code></pre>
+  </section>
+  <section>
+    <h2>FRAMEWORK ASIDE: IIFEs and Safe Code</h2>
+    <p>Anteriormente vimos que cuando creabamos una función también se creaba un nuevo contexto de ejecución (Execution Context) y que este contexto de ejecución es como un ambiente único que puede hacer uso de lo que se encuentre afuera suyo pero que lo que se declara dentro solo está disponible dentro de su mismo contexto de ejecución o en funciones que se declaren adentro, pues bueno, teniendo esto claro es bueno tener en cuenta que las IIFEs nos sirven también para crear contextos de ejecución que a lo mejor no queremos que contaminen o que compartan información con contextos externos, así pues cuando declaramos variables dentro de las IIFEs estas solo están disponibles dentro de ellas./</p>
+  </section>
+  <section>
+    <h2>UNDERSTANDING CLOSURES 1</h2>
+      <p>Siempre entender closures toma tiempo pues es una funcionalidad de JS que puede llegar algo abstranca y que lleva un poco al extremo los conceptos que hemos analizado hasta el momento pero el proceso que hemos llevado nos da las bases suficientes para entender mas facilmente lo que es un <b>Closure</b>.</p>
+      <p>Lo vamos a ver inicialmente con un ejemlpo:</p>
+      <pre><code>
+        function saludo(greet){
+          return function(name){
+            console.log(greet + ' ' + name);
+          }
+        }
+
+        var diHola = saludo('Hola');
+        diHola('Juan');
+      </code></pre>
+      <p>Aquí vemos que lo que hacemos es devolver una función cómo resultado de otra función, pero ahora enfoquemonos en lo que sucede:</p>
+      <ol>
+        <li>Asignamos el resultado de la función <code>saludo('Hola')</code> a la variable <code>diHola</code> osea que la función <em>saludo</em> ya ha sido invocada creando la variable <em>greet</em> que quedó con el valor pasado a la función que en este caso es <em>Hola</em> y ha devuelto una función que está esperando a ser invocada y que espera que se le pase el argumento <em>name</em>.</li>
+        <li>Invocamos la función devuelta que ahora tiene el nombre de <em>diHola</em> con el valor de <em>Juan</em> para nuestro ejemplo <code>diHola('Juan')</code>, cuando corremos este código en consola vemos lo siguiente:</li>
+        <img src="./media/closures_one.png" alt="">
+      </ol>
+      <p>Si lo pensamos bien, <b>cómo hace la función devuelta para recordar el valor de la variable <em>greet</em> si es que esa función ya había sido invocada y por lo tanto su contexto de ejecución había 'desaparecido'?</b> Lo que sucede es que a pesar de que es contexto de ejecución de ejecución haya desparecido recolectado por el <em>garbage collector</em>, la memoria que fue usada para crear ese contexto de ejecución <b>sigue existiendo</b> y por lo tanto la referencia a esa variables que fueron creadas en ese contexto de ejecución puede seguir siendo utilizadas, a pesar de que un contexto de ejecución desaparezca del <em>execution stack</em> su variables pueden seguir siendo referenciadas desde otros contextos que se encuentran de de ese contexto que desapareció.</p>
+      <img src="./media/closures_two.png" alt="">
+      <p>En definitiva un closure es el <b>encapsulamiento de los entornos a los que de todas maneras hiciera referencia aunque esos contextos que contenían las variables ya no existan</b>. Esto no es algo que podamos generar nosotros o alterar, es algo con lo que JS viene y de lo que podemos sacar provecho, esos entornos externos seguiran funcionando y el <em>Engine</em> se encargará de que sea el código que corramos, las variables a las que se supone que debe tener acceso sigan existiendo, <b>basicamente mantiene el contexto intacto</b>.</p>
+
+
+  </section>
+  <section>
+    <h2>UNDERSTANDING CLOSURES 2</h2>
+    <p>Aquí vamos a tener un ejemplo que seguramente va a parecer un poco mas complicado de entender pero que al final segurmanre nos va a permitir aún mejor lo que se puede lograr con los closures</p>
+    <pre><code>
+      function buildFunctions(){
+        var arr = [] //creramos un array - nada extraño hasta ahora
+
+        for (var i = 0; i < 3; i++){ //un for loop que funciona mientras i sea menor que 3
+          arr.push( //pasamos al array 3 diferentes funciones que van a mostrar en consola el valor de 1
+            function(){
+              console.log(i)
+            }
+          )
+        }
+        return arr;
+      }
+
+      var fs = buildFunctions();
+
+      fs[0]();
+      fs[1]();
+      fs[2]();
+    </code></pre>
+    <p>Como vemos es una función que adentro tiene un for loop y ese for loop debe ir empujando dentro de unr array las funciones que cuando sean invocadas van a <b>imprimir el valor de <em>i</em></b> esto lo resaltamos porque es importante tenerlo claro. Viendolo de esta manera con que nos deberíamos encontrar? Si cuando <em>i = 0;</em> el loop empuja una función dentro del array, y cuando <em>i = 1;</em> y también cuando <em>i = 2;</em> y como ya sabemos cada una de esas funciones va a mostrar en consola el valor de <em>i</em>? Que valores van a ser realmente logueados? Es posible que nos vayamos a sorprender:</p>
+    <img src="./media/closures_three.png" alt="">
+    <p>Es probable que esperaramos ver <b>1, 2, y 3</b> logueados en la consola pero no, en cambio vemos <b>3, 3, 3</b> por que pasó esto? pues bueno, en este caso debemos tener en cuenta el momento en que las funciones son invocadas y lo que ha pasado con las variables que están siendo referenciadas en ellas.</p>
+    <p>En este ejemplo pasó lo siguiente:</p>
+    <ol>
+      <li>La variable <em>fs</em> se declaró con la invocació de la función <em>buildFunctions</em>  y por lo tanto el for loop fue ejecutado</li>
+      <li>Dentro del <em>for loop</em> se declaró la variable <em>i</em> esta variable tuvo primero el valor de <b>0</b> y la primera función fue empujada al array, después tuvo el valor de <b>1</b> y otra nueva función fue empujada al array, después tuvo el valor de <b>2</b> y otra función pasó al array, finalmente tuvo el valor de <b>3</b> y como la condición fue negativa el <b>for loop terminó</b> y la variable <b>i quedó con un valor de 3</b></li>
+      <li>Cada una de estas funciones hace referencia a <em>i</em> que es la variable declarada en el for loop</li>
+      <li>Después las funciones que se encuentran dentro del array son invocadas y loguean el valor de <em>i</em> en la consola</li>
+    </ol>
+    <p>Recordemos que el for loop se ha ejecutado de primero al momento en que la variable <em>fs</em> fue declarada y para que este loop se detuviera, la condición tuvo que ser falsa y esto solo sucedió cuando el valor de <b>i fue igual a 3</b> en este momento el contexto de ejecución desapareció pero las variables siguieron en la memoria y aún se podía hacer referencia a ellas, y las otras funciones fueron invocadas mas adelante</p>
+    <p>Con <b>ES6</b> se creó una nuevo forma de solucionar esto en caso de que lo queramos evitar y es mediante el uso de <em>let</em>. <em>let</em> es una nueva forma de declarar variables y lo que hace es crear un scope de bloque, en este caso lo que hace es crear un scope diferente para cada variable lo que permite que cada vez que se cree no sea modificada por la asignació siguiente:</p>
+    <pre><code>
+      function buildFunctions(){
+        var arr = [] //creramos un array - nada extraño hasta ahora
+
+        for (var i = 0; i < 3; i++){
+          let j = i; //Se crea un scope diferente cada vez y cada uno de estos scopes contiene una variable j
+          arr.push(
+            function(){
+              console.log(j)
+            }
+          )
+        }
+        return arr;
+      }
+
+      var fs = buildFunctions();
+
+      fs[0]();
+      fs[1]();
+      fs[2]();
+    </code></pre>
+    <p>También hay otra forma de hacerlo aún usando <b>ES6</b> y es creando un nuevo contexto de ejecución cada vez que la función sea empujada al array, de esta forma se estaría apuntando cada vez a un contexto diferente que contiene un valor de la variable diferente:</p>
+    function buildFunctions(){
+      var arr = [] //creramos un array - nada extraño hasta ahora
+
+      for (var i = 0; i < 3; i++){
+        arr.push(
+        (function(j){
+          return function(){
+            console.log(j)
+          }
+        }(i))
+        )
+      }
+      return arr;
+    }
+
+    var fs = buildFunctions();
+
+    fs[0]();
+    fs[1]();
+    fs[2]();
+  </section>
+  <section>
+    <h2>FRAMEWORK ASIDE: Function Factory</h2>
+    <p>Ahora que tenemos un poco mas claro lo que son los closures, podemos entonces aprovechar su existencia para en este ejemplo crear una fabrica de funciones. Lo que vamos a hacer es crear una función que va a devolver otras funciones que dependerán del parametro que se pase al momento de invocar la función contendera o externa por decirlo de alguna manera.</p>
+    <pre><code>
+      function fabricarCarro(marca){
+        return function(color, velocidad){
+            if(marca === 'Ferrari'){
+              console.log('Quiero un carro '+ color + ' y que ande ' + velocidad)
+            }
+            if(marca === 'Bugatti'){
+              console.log('Quiero un carro ' + color + ' y que ande ' + velocidad)
+            }
+        }
+      }
+
+      var miFerrari = fabricarCarro('Ferrari'); //Invocamos la función una vez en donde se declara la variable con el valor 'Ferrari'
+      var miBugatti = fabricarCarro('Bugatti'); //Invocamos la función de nuevo en donde se declara la variable con el valor 'Bugatti'
+
+      miFerrari('rojo', 'rapdisimo!')
+      miBugatti('azul', 'mas rapido!')
+    </code></pre>
+    <p>En el momento en que declaramos la variable <b>miFerrari</b> la primera función es invocada, se crea un contexto de ejecución y la varible 'marca' es declarada con el valor que le pasamos, en este caso 'Ferrari', cómo la función ya se ejecutó entonces el contexto de ejecucíon desaparece pero sus variables siguen en memoria y aún pueden ser referenciadas por las funciones internas.</p>
+    <p>Declaramos la segunda variable <b>miBugatti</b> con la declaración de la misma función y le pasamos un argumento que para esta es 'Bugatti', se crea un contexto de ejecución pero este a pesar de que es la misma función, es diferente y se encuentra en una dirección diferente en la memoriam este contexto contiene la variable, el contexto desaparece pero la variable sigue estando al alcance de las funciones internas.</p>
+    <p>Al final lo que hacemos es pasar argumentos a las variables que en realidad son funciones y vemos que en la consola se loguean los comentarios dependiendo de cual fue la función que invcamos.</p>
 
   </section>
 </body>
