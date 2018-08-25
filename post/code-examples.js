@@ -208,3 +208,12 @@ var miArray = [
   },
   {carro: 'Porsche'}
 ]
+
+
+//My FRAMEWORK
+
+(function(Jq, Gl){
+  var jQuery = window.jQuery;
+  var myGlobal = window.global;
+
+})(window.jQuery, window.global)

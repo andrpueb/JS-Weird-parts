@@ -10,7 +10,9 @@
   <link href="https://fonts.googleapis.com/css?family=Arsenal" rel="stylesheet">
   <link rel="stylesheet" href="http:////cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/ocean.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
   <title>JS weird parts</title>
 </head>
 
@@ -289,14 +291,12 @@
     <p>Cómo vimos antes, con lo corchetes o curly braces podemos declarar un objeto y además decalarar propiedades al mismo tiempo, agregar propiedades se puede hacer de multiples formas así como acceder a ellas</p>
     <ul>
       <li> <b>Con parentesis cuadrados [ ]</b> - tenemos el objeto carro ya declarado y declaramos la propiedad marca -
-        <code>carro['marca'] = "Alfa Romeo"</code>
-        Para acceder a la marca hacemos lo siguiente:
+        <code>carro['marca'] = "Alfa Romeo"</code> Para acceder a la marca hacemos lo siguiente:
         <code>carro[marca]</code>
       </li>
       <li><b>Con la notacion punto .</b> - funciona igual que los brackets ya cuando tenemos un objeto declarado, para agregar una propiedad al objeto carro:
-          <code>carro.marca = 'Tesla'</code>
-          Para conocer el valor de la propiedad marca del objeto carro:
-          <code>carro.marca</code>
+        <code>carro.marca = 'Tesla'</code> Para conocer el valor de la propiedad marca del objeto carro:
+        <code>carro.marca</code>
       </li>
     </ul>
     <p>También podemos crerar objetos dentro de objetos de la misma usando el mismo principio</p>
@@ -306,15 +306,15 @@
   </section>
   <section>
     <h2>Objects and Object Literals</h2>
-    <p>Cuando hablamos de objetos anteriormente nos referimos la forma de crear objetos mediante <code>new Object()</code> y mediante <code>{ }</code> bueno, en realidad el uso de los corchetes es simplemente un atajo para hacer lo mismo y se le llama <b>Object Literal</b> y como vimos también podemos inicializarlo al mismo tiempo agregandole propiedades:</p>
+    <p>Cuando hablamos de objetos anteriormente nos referimos la forma de crear objetos mediante <code>new Object()</code> y mediante <code>{ }</code> bueno, en realidad el uso de los corchetes es simplemente un atajo para hacer lo mismo y se le llama <b>Object Literal</b>      y como vimos también podemos inicializarlo al mismo tiempo agregandole propiedades:</p>
     <img class="img_custom" src="./media/object_literal_one.png" alt="">
     <p></p>
   </section>
   <section>
     <h2>FRAMEWORK ASIDE: Faking Namespaces</h2>
     <p><b>Namespace:</b> A container for variables and functions, typically to keep variables and functions with the same name separate.</p>
-    <p>Los namespaces en los lenguajes de programación se refieren a un container que contiene un grupo único de identificadores y simbolos, en JS no los tenemos pero los podemos emular con el uso de objetos. <br>
-    Por ejemplo queremos hacer uso de una variable que tenga un mismo nombre para diversos objetos, como lo vimos ahora con el objeto carro, es muy probable que queramos tener varios carros pero cada uno con diferentes caracteristicas aunque mismas propiedades (marca, no de puertas, etc):
+    <p>Los namespaces en los lenguajes de programación se refieren a un container que contiene un grupo único de identificadores y simbolos, en JS no los tenemos pero los podemos emular con el uso de objetos. <br> Por ejemplo queremos hacer uso de una variable
+      que tenga un mismo nombre para diversos objetos, como lo vimos ahora con el objeto carro, es muy probable que queramos tener varios carros pero cada uno con diferentes caracteristicas aunque mismas propiedades (marca, no de puertas, etc):
     </p>
     <img class="img_custom" src="./media/namespace.png" alt="">
     <p>De esta forma podemos tener el mismo nombre de variable que pertenece a un objeto diferente.</p>
@@ -323,7 +323,8 @@
     <h2>JSON and Object Literals</h2>
     <p>Si hemos visto anteriormente la forma en la que se escribe JSON y vemos la forma en que se escribe un Object Literal vamos darnos cuenta que son muy similares:</p>
     <img class="img_custom" src="./media/object_literal_vs_json.png" alt="">
-    <p>Cómo vemos son muy parecidos y lo que cambia son las comillas en los nombres de las propiedades. JSON es un formato muy util para compartir información y JS por medio de un par de funciones nos permite pasar la información de JSON a Object Literal y viceversa.</p>
+    <p>Cómo vemos son muy parecidos y lo que cambia son las comillas en los nombres de las propiedades. JSON es un formato muy util para compartir información y JS por medio de un par de funciones nos permite pasar la información de JSON a Object Literal
+      y viceversa.</p>
     <p><b>JSON.stringify</b> nos permite pasar de Object literal a JSON:</p>
     <img class="img_custom" src="./media/stringify.png" alt="">
     <p><b>JSON.parse</b> nos permite pasar de JSON a Object Literal:</p>
@@ -335,25 +336,33 @@
   </section>
   <section>
     <h2>CONCEPTUAL ASIDE: By Value vs by Reference</h2>
-    <p>Este es un concepto que debemos tener claro. Cuando asignamos a una variable un <b>valor primitivo</b> como un numero on un string, se asigna un espacio en la memoria que contiene ese valor y una dirección que permite que la variable apunte a ese valor <code>a = 3;</code>. Si asignamos esa variable a otra variable <code>b = a;</code> como el valor de <b>a</b> es un primitivo, entonces, se asignará un nuevo espacio en memoria para <b>b</b>que contendrá una dirección diferente que apunte a su valor, en resumen en memoria habrá en un comienzo y de acuerdo a nuestro ejemplo una variable <b>a</b> y otra <b>b</b> y cada una apuntará a un valor <b>3</b> completamente diferente e independiente ubicados en una dirección en la memoria completamente distint.</p>
+    <p>Este es un concepto que debemos tener claro. Cuando asignamos a una variable un <b>valor primitivo</b> como un numero on un string, se asigna un espacio en la memoria que contiene ese valor y una dirección que permite que la variable apunte a ese
+      valor <code>a = 3;</code>. Si asignamos esa variable a otra variable <code>b = a;</code> como el valor de <b>a</b> es un primitivo, entonces, se asignará un nuevo espacio en memoria para <b>b</b>que contendrá una dirección diferente que apunte a
+      su valor, en resumen en memoria habrá en un comienzo y de acuerdo a nuestro ejemplo una variable <b>a</b> y otra <b>b</b> y cada una apuntará a un valor <b>3</b> completamente diferente e independiente ubicados en una dirección en la memoria completamente
+      distint.
+    </p>
     <img class="img_custom" src="./media/by_value.png" alt="">
     <p>Esto lo podemos probar de la siguiente manera:</p>
     <img src="./media/byValue_test.png" alt="">
     <p>Aunque <b>b</b> haya sido declarada con el valor de <b>a</b> aunque cambiemos el valor de <b>a</b> el valor de <b>b</b> no cambia.</p>
-    <p>Con los Objetos pasa algo distinto, si al objeto <b>c</b> le asignamos el objeto <b>d</b> entonces cuando modifiquemos (también se dice <b>mutar</b> en programación) el objeto <b>c</b>, este cambio también se verá reflejado en el objeto <b>d</b>, esto sucede porque a diferencia de lo que pasa con las valores primitivo, en los objetos se crea una <b>Referencia</b> al objeto y NO se crea un objeto nuevo como pasa con los primitivos. Osea que tenemos dos variables que apuntan a una misma direcció en la memoria.</p>
+    <p>Con los Objetos pasa algo distinto, si al objeto <b>c</b> le asignamos el objeto <b>d</b> entonces cuando modifiquemos (también se dice <b>mutar</b> en programación) el objeto <b>c</b>, este cambio también se verá reflejado en el objeto <b>d</b>,
+      esto sucede porque a diferencia de lo que pasa con las valores primitivo, en los objetos se crea una <b>Referencia</b> al objeto y NO se crea un objeto nuevo como pasa con los primitivos. Osea que tenemos dos variables que apuntan a una misma direcció
+      en la memoria.</p>
     <img src="./media/by_reference.png" alt="">
     <p>Lo probamos con el siguiente ejemplo:</p>
     <img src="./media/byReference_test.png" alt="">
     <p>Aunque cambiamos solamente el objeto <b>c</b> vemos que el valor de la propiedad país cambió en los dos objetos, el mismo principio aplica así pasemo el objeto como un parametro dentro de una función</p>
     <img src="./media/byReferenceFunc.png" alt="">
-    <p><b>Importante!</b> el simbolo asignación o igual (=) es el que define si un elemento se crea o no en la memoria, en caso de que el Objeto asignado no se encuentre ya en la memoria, entonces será creado en una nueva ubicación, hay que tener esto claro poque si por ejemplo tenemos:</p>
+    <p><b>Importante!</b> el simbolo asignación o igual (=) es el que define si un elemento se crea o no en la memoria, en caso de que el Objeto asignado no se encuentre ya en la memoria, entonces será creado en una nueva ubicación, hay que tener esto claro
+      poque si por ejemplo tenemos:</p>
     <img src="./media/objetoAsignarNuevo.png" alt="">
     <p>A pesar de que en un inicio las dos variables apuntaban a un mismo objeto, al una de las variables ser asignada a un objeto distinto, este nuevo objeto es creado en memoria y solo la variable al que ha sido asignado apuntará a su ubicació en memoria.</p>
   </section>
   <section>
     <h2>Objects, functions and 'this'</h2>
     <p>Seguramente hemos visto el uso de <b>this</b> en algún código o lo hemos usado nosotros mismos, pues bueno, seguramente lo vamos a ver muchas veces mas porque se usa con bastante frecuencia, pero bueno, que es <b>this</b>?</p>
-    <p>Generalmente se piensa que <b>this</b> hace referencia al contexto desde donde se invoca como una función o un objeto, pues bueno si aún lo creemos así debo decirles que NO es correcto, pues <b>this</b> hace solamente referencia al contexo principal de un Objeto y no de una función, ya sé que dijimos que las funciones son objetos pero son objetos especiales, son objetos de primera clase que tienen 'poderes' especiales por decirlo de alguna manera. En resumen, <b>THIS hace referencia al primer nivel del contexto de un Objeto (no funciones)</b> lo demostramos de la siguiente forma:</p>
+    <p>Generalmente se piensa que <b>this</b> hace referencia al contexto desde donde se invoca como una función o un objeto, pues bueno si aún lo creemos así debo decirles que NO es correcto, pues <b>this</b> hace solamente referencia al contexo principal
+      de un Objeto y no de una función, ya sé que dijimos que las funciones son objetos pero son objetos especiales, son objetos de primera clase que tienen 'poderes' especiales por decirlo de alguna manera. En resumen, <b>THIS hace referencia al primer nivel del contexto de un Objeto (no funciones)</b>      lo demostramos de la siguiente forma:</p>
     <p>Mostremos en la console en el contexto global el valor de <b>this</b>:</p>
     <img src="./media/this_one.png" alt="">
     <p>Nos devuelve el contenido del contexto global que es Window</p>
@@ -362,21 +371,27 @@
     <p>Seguimos viendo el contenido del objeto global Window a pesar de que estamos dentro de una función.</p>
     <p>Ahora, dentro de un Objeto creemos un metodo que imprima en consola el valor de <b>this</b>:</p>
     <img src="./media/this_three.png" alt="">
-    <p>Ahora vemos que el valor mostrado en la consola es el objeto dentro del que se encuentra el método y NO el contexo global, esto nos demuestra que <b>this</b> lo podemos usar principalmente dentro de los objetos si es que queremos referirnos al contenido de ese objeto de alguna manera, en nuestro ejemplo podemos cambiar la marca de nuestro carro refiriendonos a <b>this</b>:</p>
+    <p>Ahora vemos que el valor mostrado en la consola es el objeto dentro del que se encuentra el método y NO el contexo global, esto nos demuestra que <b>this</b> lo podemos usar principalmente dentro de los objetos si es que queremos referirnos al contenido
+      de ese objeto de alguna manera, en nuestro ejemplo podemos cambiar la marca de nuestro carro refiriendonos a <b>this</b>:</p>
     <img src="./media/this_four.png" alt="">
-    <p><b>Importante!</b> que pasa si dentro de un método tenemos otra función que busca hacer uso del contenido del objeto mediante <b>this</b>? Lo primero que pensamo de acuerdo a lo que vimos es que <b>this</b> dentro de un objeto hace referencia al objeto en el que se encuentra, eso lo pensamos muchos y a lo mejor no estaría mal que fuera así, de hecho seríá hasta lógico pero <b>NO ES ASÍ</b> cuando creamos una función dentro de un método, y esta función hace uso de <b>this</b> el contexto al que se hace referencia es de nuevo el contexto <b>global</b>:</p>
+    <p><b>Importante!</b> que pasa si dentro de un método tenemos otra función que busca hacer uso del contenido del objeto mediante <b>this</b>? Lo primero que pensamo de acuerdo a lo que vimos es que <b>this</b> dentro de un objeto hace referencia al objeto
+      en el que se encuentra, eso lo pensamos muchos y a lo mejor no estaría mal que fuera así, de hecho seríá hasta lógico pero <b>NO ES ASÍ</b> cuando creamos una función dentro de un método, y esta función hace uso de <b>this</b> el contexto al que
+      se hace referencia es de nuevo el contexto <b>global</b>:</p>
     <img src="./media/this_five.png" alt="">
-    <p>En el ejemplo anterior vemos como al tratar de imprimir en consola el contenido de <b>this</b> mediante una función que se encuentra dentro de un método lo que muestra la consola es el contenido del contexto global o Window. Una solución común para estos casos es crear una variable dentro del Objeto que haga referencia a <b>this</b> esta variable es muchas veces llamada <b>self</b>.</p>
-      <h3>self</h3>
-      <p>Esta es una variable que se crea dentro del objeto y que resuelve el comportamiento de <b>this</b> dentro de funciones creadas dentro de los método. Cómo ya vimos antes, cuando declaramos una variable y le asignamos un objeto, lo que hace el engine es crear una referencia hacia el objeto, por lo tanto podemos hacer <code>self = this</code> aquí un ejemplo:</p>
-      <img src="./media/this_six.png" alt="">
-      <p>Ahora vemos que la referencia del objeto se ha mantenido y que el objeto impreso en la consola es el mismo objeto en el que se encuentra la función.</p>
+    <p>En el ejemplo anterior vemos como al tratar de imprimir en consola el contenido de <b>this</b> mediante una función que se encuentra dentro de un método lo que muestra la consola es el contenido del contexto global o Window. Una solución común para
+      estos casos es crear una variable dentro del Objeto que haga referencia a <b>this</b> esta variable es muchas veces llamada <b>self</b>.</p>
+    <h3>self</h3>
+    <p>Esta es una variable que se crea dentro del objeto y que resuelve el comportamiento de <b>this</b> dentro de funciones creadas dentro de los método. Cómo ya vimos antes, cuando declaramos una variable y le asignamos un objeto, lo que hace el engine
+      es crear una referencia hacia el objeto, por lo tanto podemos hacer <code>self = this</code> aquí un ejemplo:</p>
+    <img src="./media/this_six.png" alt="">
+    <p>Ahora vemos que la referencia del objeto se ha mantenido y que el objeto impreso en la consola es el mismo objeto en el que se encuentra la función.</p>
   </section>
   <section>
     <h2>ARRAYS: Collections of anything</h2>
     <p>En JS a diferencia de otros lenguajes de programación, podemos poner lo que queramos en un array y combinarlo como queramos, podemos tener en un mismo array <b>objetos, funciones, primitivos</b> lo que queramos, por ejemplo:</p>
     <img src="./media/array_one.png" alt="">
-    <p>Tenemos un array que contiene un numero, una función y un objeto y esto es perfectamente válido porque es permitido por el engine de JS. Además podemos hacer uso de los elementos de los arrays o colecciones como mejor nos parezca, por ejemplo podemos usar en este caso la función y el contenido del objeto para imprimir algo en la consola:</p>
+    <p>Tenemos un array que contiene un numero, una función y un objeto y esto es perfectamente válido porque es permitido por el engine de JS. Además podemos hacer uso de los elementos de los arrays o colecciones como mejor nos parezca, por ejemplo podemos
+      usar en este caso la función y el contenido del objeto para imprimir algo en la consola:</p>
     <img src="./media/array_two.png" alt="">
   </section>
   <section>
@@ -387,8 +402,10 @@
         //dentro de la función hago uso de los argumentos
       }
     </code></pre>
-    <p>>Es probable que otros lenguajes de programación nos devuelvan errores cuando la función invocada no contiene todos los argumentos que en un inicio fueron declarados con la función, JS no nos devuelve ningún error, lo que si va devolver es el valor 'undefined' pues la variable fue declarada pero nunca asignada.</p>
-    <p>JS contiene dentro de las funciones una variable que se llama <b>arguments</b> y que lo que hace es devolver el valor de los argumentos pasados a la función en una <em>especie de array</em> que no es en realidad un array porque no cotiene los métodos que contiene un array como pop, unshift, solo tiene el método <em>length</em> que nos devuelve el largo del array y bueno también podemos devolver el contenido de acuerdo a su ubicación dentro del array e.g: <code>array[2]</code>.</p>
+    <p>>Es probable que otros lenguajes de programación nos devuelvan errores cuando la función invocada no contiene todos los argumentos que en un inicio fueron declarados con la función, JS no nos devuelve ningún error, lo que si va devolver es el valor
+      'undefined' pues la variable fue declarada pero nunca asignada.</p>
+    <p>JS contiene dentro de las funciones una variable que se llama <b>arguments</b> y que lo que hace es devolver el valor de los argumentos pasados a la función en una <em>especie de array</em> que no es en realidad un array porque no cotiene los métodos
+      que contiene un array como pop, unshift, solo tiene el método <em>length</em> que nos devuelve el largo del array y bueno también podemos devolver el contenido de acuerdo a su ubicación dentro del array e.g: <code>array[2]</code>.</p>
     <p>Aquí hacemos uso de la variable <b>arguments:</b></p>
     <pre><code>
       function myCasa(cuartos, banos, jardines){
@@ -412,7 +429,9 @@
   </section>
   <section>
     <h2>DANGEROUS ASIDE: Automatics Semicolon Insertion</h2>
-    <p>El Engine de JS va analizando caractér por caractér todo el syntax del código que escribimos y de acuerdo a lo que va viendo va tomando decisiones para ejecutar tareas, pues bueno, dentro de las acciones que toma el Engine es la de agregar automaticamente los punto y coma ; (semicolon en inglés) faltantes en nuestro código lo que hace que de alguna manera no sea obligatorio escribirlos y generalmente nuestro código funciona como esperamos. Pero esto no siempre sucede y es probable que el Engine nos inserte un punto y coma en donde no queremos y que al final el resultado que esperamos de nuestro programa, por esto es importante tener buenos habitos al momento de escribir código.</p>
+    <p>El Engine de JS va analizando caractér por caractér todo el syntax del código que escribimos y de acuerdo a lo que va viendo va tomando decisiones para ejecutar tareas, pues bueno, dentro de las acciones que toma el Engine es la de agregar automaticamente
+      los punto y coma ; (semicolon en inglés) faltantes en nuestro código lo que hace que de alguna manera no sea obligatorio escribirlos y generalmente nuestro código funciona como esperamos. Pero esto no siempre sucede y es probable que el Engine nos
+      inserte un punto y coma en donde no queremos y que al final el resultado que esperamos de nuestro programa, por esto es importante tener buenos habitos al momento de escribir código.</p>
     <p>Veamos el ejemplo siguiente:</p>
     <pre><code>
       function juego(){
@@ -427,7 +446,9 @@
     </code></pre>
     <p>Viendo el código anterior seguramente pensemos que al ejecutar el código vamos a ver en la consola el valor del objeto que debe ser devuelto por la función <code>{personaje : 'Zelda'}</code> pero lo corremos y vemos lo siguiente: </p>
     <img src="./media/semicolon_insertion_one.png" alt="">
-    <p>Nos devuelve <b>undefined</b> pero por que? pues bueno, este es el resultado de la inserción automatica de punto y coma del engine, al ver que seguido del método <code>return</code> venía un retorno de carro (carriage return en ingles) o Enter para pasar a la linea de abajo, pues el <em>Engine</em> asumió que debía insertar un punto y coma por lo tanto la función no devolvió nada porque terminó en <code>return;</code> por esta razón es mejor siempre evitar cambios de linea innecesarios y escribir los puntos y comas así no sea del todo obligatorio, nos evitamos problemas y perder muchisimo tiempo buscando errores en nuesctro código que como estos pueden ser muy dificiles de encontrar.</p>
+    <p>Nos devuelve <b>undefined</b> pero por que? pues bueno, este es el resultado de la inserción automatica de punto y coma del engine, al ver que seguido del método <code>return</code> venía un retorno de carro (carriage return en ingles) o Enter para
+      pasar a la linea de abajo, pues el <em>Engine</em> asumió que debía insertar un punto y coma por lo tanto la función no devolvió nada porque terminó en <code>return;</code> por esta razón es mejor siempre evitar cambios de linea innecesarios y escribir
+      los puntos y comas así no sea del todo obligatorio, nos evitamos problemas y perder muchisimo tiempo buscando errores en nuesctro código que como estos pueden ser muy dificiles de encontrar.</p>
     <p>Ahora probemos la siguiente función y vemos como SI nos devuelve lo que estamos esperando:</p>
     <pre><code>
       function juego(){
@@ -459,7 +480,8 @@
         }
         saludar('Juan'); //Invocamos la función
     </code></pre>
-    <p>Cómo sabemos la única forma de que estás funciones sean ejecutadas es invocandolas después de haberlas declarado en una linea aparte y para invocarlas usamos el nombre y los parentesis e.g. <code>saludar()</code>, las <b>IIFE</b> son funciones que básicamente se invocan a ellas mismas al momento de ser declaradas, veamos el siguiente ejemplo:</p>
+    <p>Cómo sabemos la única forma de que estás funciones sean ejecutadas es invocandolas después de haberlas declarado en una linea aparte y para invocarlas usamos el nombre y los parentesis e.g. <code>saludar()</code>, las <b>IIFE</b> son funciones que
+      básicamente se invocan a ellas mismas al momento de ser declaradas, veamos el siguiente ejemplo:</p>
     <pre><code>
       var nombre = function (nombre){
         return nombre;
@@ -491,13 +513,16 @@
   </section>
   <section>
     <h2>FRAMEWORK ASIDE: IIFEs and Safe Code</h2>
-    <p>Anteriormente vimos que cuando creabamos una función también se creaba un nuevo contexto de ejecución (Execution Context) y que este contexto de ejecución es como un ambiente único que puede hacer uso de lo que se encuentre afuera suyo pero que lo que se declara dentro solo está disponible dentro de su mismo contexto de ejecución o en funciones que se declaren adentro, pues bueno, teniendo esto claro es bueno tener en cuenta que las IIFEs nos sirven también para crear contextos de ejecución que a lo mejor no queremos que contaminen o que compartan información con contextos externos, así pues cuando declaramos variables dentro de las IIFEs estas solo están disponibles dentro de ellas./</p>
+    <p>Anteriormente vimos que cuando creabamos una función también se creaba un nuevo contexto de ejecución (Execution Context) y que este contexto de ejecución es como un ambiente único que puede hacer uso de lo que se encuentre afuera suyo pero que lo
+      que se declara dentro solo está disponible dentro de su mismo contexto de ejecución o en funciones que se declaren adentro, pues bueno, teniendo esto claro es bueno tener en cuenta que las IIFEs nos sirven también para crear contextos de ejecución
+      que a lo mejor no queremos que contaminen o que compartan información con contextos externos, así pues cuando declaramos variables dentro de las IIFEs estas solo están disponibles dentro de ellas./</p>
   </section>
   <section>
     <h2>UNDERSTANDING CLOSURES 1</h2>
-      <p>Siempre entender closures toma tiempo pues es una funcionalidad de JS que puede llegar algo abstranca y que lleva un poco al extremo los conceptos que hemos analizado hasta el momento pero el proceso que hemos llevado nos da las bases suficientes para entender mas facilmente lo que es un <b>Closure</b>.</p>
-      <p>Lo vamos a ver inicialmente con un ejemlpo:</p>
-      <pre><code>
+    <p>Siempre entender closures toma tiempo pues es una funcionalidad de JS que puede llegar algo abstranca y que lleva un poco al extremo los conceptos que hemos analizado hasta el momento pero el proceso que hemos llevado nos da las bases suficientes
+      para entender mas facilmente lo que es un <b>Closure</b>.</p>
+    <p>Lo vamos a ver inicialmente con un ejemlpo:</p>
+    <pre><code>
         function saludo(greet){
           return function(name){
             console.log(greet + ' ' + name);
@@ -507,15 +532,20 @@
         var diHola = saludo('Hola');
         diHola('Juan');
       </code></pre>
-      <p>Aquí vemos que lo que hacemos es devolver una función cómo resultado de otra función, pero ahora enfoquemonos en lo que sucede:</p>
-      <ol>
-        <li>Asignamos el resultado de la función <code>saludo('Hola')</code> a la variable <code>diHola</code> osea que la función <em>saludo</em> ya ha sido invocada creando la variable <em>greet</em> que quedó con el valor pasado a la función que en este caso es <em>Hola</em> y ha devuelto una función que está esperando a ser invocada y que espera que se le pase el argumento <em>name</em>.</li>
-        <li>Invocamos la función devuelta que ahora tiene el nombre de <em>diHola</em> con el valor de <em>Juan</em> para nuestro ejemplo <code>diHola('Juan')</code>, cuando corremos este código en consola vemos lo siguiente:</li>
-        <img src="./media/closures_one.png" alt="">
-      </ol>
-      <p>Si lo pensamos bien, <b>cómo hace la función devuelta para recordar el valor de la variable <em>greet</em> si es que esa función ya había sido invocada y por lo tanto su contexto de ejecución había 'desaparecido'?</b> Lo que sucede es que a pesar de que es contexto de ejecución de ejecución haya desparecido recolectado por el <em>garbage collector</em>, la memoria que fue usada para crear ese contexto de ejecución <b>sigue existiendo</b> y por lo tanto la referencia a esa variables que fueron creadas en ese contexto de ejecución puede seguir siendo utilizadas, a pesar de que un contexto de ejecución desaparezca del <em>execution stack</em> su variables pueden seguir siendo referenciadas desde otros contextos que se encuentran de de ese contexto que desapareció.</p>
-      <img src="./media/closures_two.png" alt="">
-      <p>En definitiva un closure es el <b>encapsulamiento de los entornos a los que de todas maneras hiciera referencia aunque esos contextos que contenían las variables ya no existan</b>. Esto no es algo que podamos generar nosotros o alterar, es algo con lo que JS viene y de lo que podemos sacar provecho, esos entornos externos seguiran funcionando y el <em>Engine</em> se encargará de que sea el código que corramos, las variables a las que se supone que debe tener acceso sigan existiendo, <b>basicamente mantiene el contexto intacto</b>.</p>
+    <p>Aquí vemos que lo que hacemos es devolver una función cómo resultado de otra función, pero ahora enfoquemonos en lo que sucede:</p>
+    <ol>
+      <li>Asignamos el resultado de la función <code>saludo('Hola')</code> a la variable <code>diHola</code> osea que la función <em>saludo</em> ya ha sido invocada creando la variable <em>greet</em> que quedó con el valor pasado a la función que en este
+        caso es <em>Hola</em> y ha devuelto una función que está esperando a ser invocada y que espera que se le pase el argumento <em>name</em>.</li>
+      <li>Invocamos la función devuelta que ahora tiene el nombre de <em>diHola</em> con el valor de <em>Juan</em> para nuestro ejemplo <code>diHola('Juan')</code>, cuando corremos este código en consola vemos lo siguiente:</li>
+      <img src="./media/closures_one.png" alt="">
+    </ol>
+    <p>Si lo pensamos bien, <b>cómo hace la función devuelta para recordar el valor de la variable <em>greet</em> si es que esa función ya había sido invocada y por lo tanto su contexto de ejecución había 'desaparecido'?</b> Lo que sucede es que a pesar
+      de que es contexto de ejecución de ejecución haya desparecido recolectado por el <em>garbage collector</em>, la memoria que fue usada para crear ese contexto de ejecución <b>sigue existiendo</b> y por lo tanto la referencia a esa variables que fueron
+      creadas en ese contexto de ejecución puede seguir siendo utilizadas, a pesar de que un contexto de ejecución desaparezca del <em>execution stack</em> su variables pueden seguir siendo referenciadas desde otros contextos que se encuentran de de ese
+      contexto que desapareció.</p>
+    <img src="./media/closures_two.png" alt="">
+    <p>En definitiva un closure es el <b>encapsulamiento de los entornos a los que de todas maneras hiciera referencia aunque esos contextos que contenían las variables ya no existan</b>. Esto no es algo que podamos generar nosotros o alterar, es algo con
+      lo que JS viene y de lo que podemos sacar provecho, esos entornos externos seguiran funcionando y el <em>Engine</em> se encargará de que sea el código que corramos, las variables a las que se supone que debe tener acceso sigan existiendo, <b>basicamente mantiene el contexto intacto</b>.</p>
 
 
   </section>
@@ -542,18 +572,24 @@
       fs[1]();
       fs[2]();
     </code></pre>
-    <p>Como vemos es una función que adentro tiene un for loop y ese for loop debe ir empujando dentro de unr array las funciones que cuando sean invocadas van a <b>imprimir el valor de <em>i</em></b> esto lo resaltamos porque es importante tenerlo claro. Viendolo de esta manera con que nos deberíamos encontrar? Si cuando <em>i = 0;</em> el loop empuja una función dentro del array, y cuando <em>i = 1;</em> y también cuando <em>i = 2;</em> y como ya sabemos cada una de esas funciones va a mostrar en consola el valor de <em>i</em>? Que valores van a ser realmente logueados? Es posible que nos vayamos a sorprender:</p>
+    <p>Como vemos es una función que adentro tiene un for loop y ese for loop debe ir empujando dentro de unr array las funciones que cuando sean invocadas van a <b>imprimir el valor de <em>i</em></b> esto lo resaltamos porque es importante tenerlo claro.
+      Viendolo de esta manera con que nos deberíamos encontrar? Si cuando <em>i = 0;</em> el loop empuja una función dentro del array, y cuando <em>i = 1;</em> y también cuando <em>i = 2;</em> y como ya sabemos cada una de esas funciones va a mostrar
+      en consola el valor de <em>i</em>? Que valores van a ser realmente logueados? Es posible que nos vayamos a sorprender:</p>
     <img src="./media/closures_three.png" alt="">
-    <p>Es probable que esperaramos ver <b>1, 2, y 3</b> logueados en la consola pero no, en cambio vemos <b>3, 3, 3</b> por que pasó esto? pues bueno, en este caso debemos tener en cuenta el momento en que las funciones son invocadas y lo que ha pasado con las variables que están siendo referenciadas en ellas.</p>
+    <p>Es probable que esperaramos ver <b>1, 2, y 3</b> logueados en la consola pero no, en cambio vemos <b>3, 3, 3</b> por que pasó esto? pues bueno, en este caso debemos tener en cuenta el momento en que las funciones son invocadas y lo que ha pasado con
+      las variables que están siendo referenciadas en ellas.</p>
     <p>En este ejemplo pasó lo siguiente:</p>
     <ol>
-      <li>La variable <em>fs</em> se declaró con la invocació de la función <em>buildFunctions</em>  y por lo tanto el for loop fue ejecutado</li>
-      <li>Dentro del <em>for loop</em> se declaró la variable <em>i</em> esta variable tuvo primero el valor de <b>0</b> y la primera función fue empujada al array, después tuvo el valor de <b>1</b> y otra nueva función fue empujada al array, después tuvo el valor de <b>2</b> y otra función pasó al array, finalmente tuvo el valor de <b>3</b> y como la condición fue negativa el <b>for loop terminó</b> y la variable <b>i quedó con un valor de 3</b></li>
+      <li>La variable <em>fs</em> se declaró con la invocació de la función <em>buildFunctions</em> y por lo tanto el for loop fue ejecutado</li>
+      <li>Dentro del <em>for loop</em> se declaró la variable <em>i</em> esta variable tuvo primero el valor de <b>0</b> y la primera función fue empujada al array, después tuvo el valor de <b>1</b> y otra nueva función fue empujada al array, después tuvo
+        el valor de <b>2</b> y otra función pasó al array, finalmente tuvo el valor de <b>3</b> y como la condición fue negativa el <b>for loop terminó</b> y la variable <b>i quedó con un valor de 3</b></li>
       <li>Cada una de estas funciones hace referencia a <em>i</em> que es la variable declarada en el for loop</li>
       <li>Después las funciones que se encuentran dentro del array son invocadas y loguean el valor de <em>i</em> en la consola</li>
     </ol>
-    <p>Recordemos que el for loop se ha ejecutado de primero al momento en que la variable <em>fs</em> fue declarada y para que este loop se detuviera, la condición tuvo que ser falsa y esto solo sucedió cuando el valor de <b>i fue igual a 3</b> en este momento el contexto de ejecución desapareció pero las variables siguieron en la memoria y aún se podía hacer referencia a ellas, y las otras funciones fueron invocadas mas adelante</p>
-    <p>Con <b>ES6</b> se creó una nuevo forma de solucionar esto en caso de que lo queramos evitar y es mediante el uso de <em>let</em>. <em>let</em> es una nueva forma de declarar variables y lo que hace es crear un scope de bloque, en este caso lo que hace es crear un scope diferente para cada variable lo que permite que cada vez que se cree no sea modificada por la asignació siguiente:</p>
+    <p>Recordemos que el for loop se ha ejecutado de primero al momento en que la variable <em>fs</em> fue declarada y para que este loop se detuviera, la condición tuvo que ser falsa y esto solo sucedió cuando el valor de <b>i fue igual a 3</b> en este
+      momento el contexto de ejecución desapareció pero las variables siguieron en la memoria y aún se podía hacer referencia a ellas, y las otras funciones fueron invocadas mas adelante</p>
+    <p>Con <b>ES6</b> se creó una nuevo forma de solucionar esto en caso de que lo queramos evitar y es mediante el uso de <em>let</em>. <em>let</em> es una nueva forma de declarar variables y lo que hace es crear un scope de bloque, en este caso lo que
+      hace es crear un scope diferente para cada variable lo que permite que cada vez que se cree no sea modificada por la asignació siguiente:</p>
     <pre><code>
       function buildFunctions(){
         var arr = [] //creramos un array - nada extraño hasta ahora
@@ -575,32 +611,16 @@
       fs[1]();
       fs[2]();
     </code></pre>
-    <p>También hay otra forma de hacerlo aún usando <b>ES6</b> y es creando un nuevo contexto de ejecución cada vez que la función sea empujada al array, de esta forma se estaría apuntando cada vez a un contexto diferente que contiene un valor de la variable diferente:</p>
-    function buildFunctions(){
-      var arr = [] //creramos un array - nada extraño hasta ahora
-
-      for (var i = 0; i < 3; i++){
-        arr.push(
-        (function(j){
-          return function(){
-            console.log(j)
-          }
-        }(i))
-        )
-      }
-      return arr;
-    }
-
-    var fs = buildFunctions();
-
-    fs[0]();
-    fs[1]();
-    fs[2]();
-  </section>
-  <section>
-    <h2>FRAMEWORK ASIDE: Function Factory</h2>
-    <p>Ahora que tenemos un poco mas claro lo que son los closures, podemos entonces aprovechar su existencia para en este ejemplo crear una fabrica de funciones. Lo que vamos a hacer es crear una función que va a devolver otras funciones que dependerán del parametro que se pase al momento de invocar la función contendera o externa por decirlo de alguna manera.</p>
-    <pre><code>
+    <p>También hay otra forma de hacerlo aún usando <b>ES6</b> y es creando un nuevo contexto de ejecución cada vez que la función sea empujada al array, de esta forma se estaría apuntando cada vez a un contexto diferente que contiene un valor de la variable
+      diferente:
+    </p>
+    function buildFunctions(){ var arr = [] //creramos un array - nada extraño hasta ahora for (var i = 0; i
+    < 3; i++){ arr.push( (function(j){ return function(){ console.log(j) } }(i)) ) } return arr; } var fs=b uildFunctions(); fs[0](); fs[1](); fs[2](); </section>
+      <section>
+        <h2>FRAMEWORK ASIDE: Function Factory</h2>
+        <p>Ahora que tenemos un poco mas claro lo que son los closures, podemos entonces aprovechar su existencia para en este ejemplo crear una fabrica de funciones. Lo que vamos a hacer es crear una función que va a devolver otras funciones que dependerán
+          del parametro que se pase al momento de invocar la función contendera o externa por decirlo de alguna manera.</p>
+        <pre><code>
       function fabricarCarro(marca){
         return function(color, velocidad){
             if(marca === 'Ferrari'){
@@ -618,11 +638,482 @@
       miFerrari('rojo', 'rapdisimo!')
       miBugatti('azul', 'mas rapido!')
     </code></pre>
-    <p>En el momento en que declaramos la variable <b>miFerrari</b> la primera función es invocada, se crea un contexto de ejecución y la varible 'marca' es declarada con el valor que le pasamos, en este caso 'Ferrari', cómo la función ya se ejecutó entonces el contexto de ejecucíon desaparece pero sus variables siguen en memoria y aún pueden ser referenciadas por las funciones internas.</p>
-    <p>Declaramos la segunda variable <b>miBugatti</b> con la declaración de la misma función y le pasamos un argumento que para esta es 'Bugatti', se crea un contexto de ejecución pero este a pesar de que es la misma función, es diferente y se encuentra en una dirección diferente en la memoriam este contexto contiene la variable, el contexto desaparece pero la variable sigue estando al alcance de las funciones internas.</p>
-    <p>Al final lo que hacemos es pasar argumentos a las variables que en realidad son funciones y vemos que en la consola se loguean los comentarios dependiendo de cual fue la función que invcamos.</p>
+        <p>En el momento en que declaramos la variable <b>miFerrari</b> la primera función es invocada, se crea un contexto de ejecución y la varible 'marca' es declarada con el valor que le pasamos, en este caso 'Ferrari', cómo la función ya se ejecutó
+          entonces el contexto de ejecucíon desaparece pero sus variables siguen en memoria y aún pueden ser referenciadas por las funciones internas.</p>
+        <p>Declaramos la segunda variable <b>miBugatti</b> con la declaración de la misma función y le pasamos un argumento que para esta es 'Bugatti', se crea un contexto de ejecución pero este a pesar de que es la misma función, es diferente y se encuentra
+          en una dirección diferente en la memoriam este contexto contiene la variable, el contexto desaparece pero la variable sigue estando al alcance de las funciones internas.</p>
+        <p>Al final lo que hacemos es pasar argumentos a las variables que en realidad son funciones y vemos que en la consola se loguean los comentarios dependiendo de cual fue la función que invcamos.</p>
+      </section>
+      <section>
+        <h2>Closures and Callbacks</h2>
+        <p>Si hemos antes usado JS seguramente hemos también hecho uso de closures y callbacks a lo mejor sin darnos cuenta pero el hecho es que se utilizan con bastante frecuencia, por ejemlpo cuando usamos <b>setTimeout</b>:</p>
+        <pre><code>
+      function pasarTiempo(){
+        var tiempo = 'Han pasado tres segundos';
+      setTimeout(function(){
+        console.log(tiempo)
 
-  </section>
+      }, 3000)
+    }
+    pasarTiempo();
+    </code></pre>
+        <p>Ahora seguramente lo vemos un poco mas claro, acá lo que está pasando es que el método setTimeout espera 3 segundos para ejecutarse después de que se haya invocado la función que lo contiene, al ejecutarse el <em>setTimeout</em> todavía puede
+          hacer referencia a las variables qexternas aunque ya la función hubiese sifo invocada tres segundo atrás, un perfecto ejemplo de Closures.</p>
+        <p>Por otro lado tenemos los <b>callbacks</b> que en resumen son <b><em>Una función a la que le pasamos como argumento otra función para que sea ejecutada cuando la primera funcioón haya terminado</em></b>:</p>
+        <pre><code>
+      function llamarCuandoTermine(funcionCallback){
+        var a = 'Un valor cualquiera';
+        var b = 'Otro valor cualquiera';
+
+        var c = a + b;
+
+        funcionCallback();
+      }
+
+      llamarCuandoTermine(function(){
+        console.log('Terminé')
+      })
+
+      llamarCuandoTermine(function(){
+        console.log('Yo también terminé')
+      })
+    </code></pre>
+      </section>
+      <section>
+        <h2>call(), apply(), and bind()</h2>
+        <p>Estos son algunos métodos que a lo mejor no conocíamos pero que son bastante útiles y nos podrían permitir reutilizar nuestro código de una manera bastante eficiente, comencemos con <b>call</b>:</p>
+        <h3>bind()</h3>
+        <p><em>bind()</em> es un método que hace parte de todas las funciones, todas las funciones tienen acceso a estos tres métodos (call, apply y bind). Lo que en resumen <b>bind()</b> nos permite es hacer una copia de la función, asignarle un nuevo contexto
+          y pasarle argumentos que van a preceder los que sean pasados cuando la función es invocada. Un poco confuso? veamoslo con un ejemplo:</p>
+        <pre><code>
+      //Creemos un objeto cualquiera
+      var avion = {
+        asientos: 15,
+        velocidadMax: '700Km/h',
+        loguearConsola : function(){
+            return 'Tengo un avión con ' + this.asientos + ' asientos y que vuela a ' + this.velocidadMax;
+        }
+      }
+
+      var otroMensaje = function (arg1, arg2){
+        console.log(this.loguearConsola());//Se ve un poco raro, estos 'this' en este lugar apunta al objeto global que no contiene el método 'loguearConsola'
+        console.log('Mi hermano tiene ' + arg1 + ' años y mi hermana ' + arg2);
+      }
+
+      var darPoderesFuncion = otroMensaje.bind(avion);
+      darPoderesFuncion(32, 22);
+      //También podemos establecer valores que van a preceder a los de la funcion, mi hermano va a tener siempre 15:
+      var darPoderesFuncion = otroMensaje.bind(avion, 15);
+      darPoderesFuncion(32, 22); //Aunque le paso el valor de 32, 15 quedó como el primer valor, ahora 32 es el segundo y 22 el tercero
+    </code></pre>
+        <h3>call()</h3>
+        <p>Estos tres métodos hacen todos cosas por el estilo, en este caso lo que <b>call</b> hace, call hace básicamente lo mismo que <b>bind</b> hace a diferencia que <b>call</b> invoca la función de inmediato, veamos:</p>
+        <pre><code>
+      //Tenemos todo igual que antes
+      var avion = {
+        asientos: 15,
+        velocidadMax: '700Km/h',
+        loguearConsola : function(){
+            return 'Tengo un avión con ' + this.asientos + ' asientos y que vuela a ' + this.velocidadMax;
+        }
+      }
+
+      var otroMensaje = function (arg1, arg2){
+        console.log(this.loguearConsola());
+        console.log('Mi hermano tiene ' + arg1 + ' años y mi hermana ' + arg2);
+      }
+
+      otroMensaje.call(avion, 18, 15)
+    </code></pre>
+        <p>Al correr este código veremos que la función se ejecutó de inmediato, por lo tanto <b>call</b> no hace una copia como si lo hace bind, call invoca la función. También cambiamos con el primer argumento el lugar a donde apunta <em>this</em> y le
+          podemos pasar los argumentos que queramos.</p>
+        <h3>apply()</h3>
+        <p>Lo mismo que <b>call</b> con la diferencia que los argumento se pasan como un array no en comas, veamos:</p>
+        <pre><code>
+      //Tenemos todo igual que antes
+      var avion = {
+        asientos: 15,
+        velocidadMax: '700Km/h',
+        loguearConsola : function(){
+            return 'Tengo un avión con ' + this.asientos + ' asientos y que vuela a ' + this.velocidadMax;
+        }
+      }
+
+      var otroMensaje = function (arg1, arg2){
+        console.log(this.loguearConsola());
+        console.log('Mi hermano tiene ' + arg1 + ' años y mi hermana ' + arg2);
+      }
+      otroMensaje.apply(avion, [15, 32])
+    </code></pre>
+        <h3>Usos Prácticos de estos métodos</h3>
+        <h4>Function Borrowing</h4>
+        <p>Estos métodos pueden llegar a ser muy útiles si sabemos en que casos utilizarlos, por ejemplo, podemos usar tanto <b>call</b> como <b>apply</b> para algo que se llama function borrowing o prestamo de funciones, lo que hacemos es de alguna forma
+          pedir prestada la función de un objeto para usarla en mi objeto:</p>
+        <pre><code>
+      var carro = {
+        distancia: 270,
+        tiempo: 4,
+        velocidad: function(){
+          console.log('Mi carro va a ' + this.distancia/this.tiempo + ' kilometros por hora');
+        }
+      }
+
+      var bus = {
+        distancia: 350,
+        tiempo: 6,
+      }
+
+      //Tengo un objeto con el método que me da la velocidad pero en el otro no lo tengo y quisera usarla
+
+      carro.velocidad.call(bus, 500, 9); //carro le presta la funciona velocidad a bus
+    </code></pre>
+        <h4>Function Currying</h4>
+        <p>Es crear una copia de una función pero con algunos parametros predefinidos, veamoslo mas claro:</p>
+        <pre><code>
+      function manejar(a, b){
+        console.log('En ' + a + ' se maneja al lado ' + b + ' de la vía' )
+      }
+
+      //y Ahora queremos usar la misma funcion pero para casos diferentes:
+      //Estos argumentos que pasamos en el call son los que persisten:
+      var manejarLatinoamerica = manejar.bind(this, 'Colombia', 'Derecho')
+      //Podemos pasar otros argumentos que no van a cambiar en nada porque la función solo recibe dos y ya los pasamos antes (colombia, izquierdo)
+      manejarLatinoamerica('hola', 'hey');
+
+      //O podemos pasar solo un argumento al momento del call o podemos no pasar nada y pasarlos después, hay que tener claro que si pasamos solo uno al comienzo y la función pide dos, el que se pase después irá de segundo:
+      var manejarInglaterra = manejar.bind(this, 'Inglaterra', )
+      manejarLatinoamerica('Izquierdo');
+
+      //En este caso que lo que usamos es una función, pasamos solo 'this' como el nuevo contexto porque en realidad no importa pues como sabemos 'this' en una función apunta al objeto global
+    </code></pre>
+      </section>
+      <section>
+        <h2>Functional Programming</h2>
+        <p></p>
+      </section>
+      <section>
+        <h2>Functional Programming 2</h2>
+        <p>Underscore aplica mucho de functional programming, podemos entar a la página underscorejs.org y en la esquina superior izquierda hay un vinculo <a href="https://underscorejs.org/docs/underscore.html">Annotated Source</a> que muestra el código
+          y nos da una breve explicación de que hacen las funciones, immportante revisarlo.</p>
+      </section>
+      <section>
+        <h2>Classical vs Prototypal Inheritance</h2>
+        <p>Primero definamos lo que es herencia: <em>'Un objeto tiene acceso a las propiedades y métodos de otro objeto'</em></p>
+        <p>Classical Inheritance:</p>
+        <ul>
+          <li>Muy larga de definir, tenemos que escribir mucho código</li>
+        </ul>
+        <p>Prototypal Inheritance</p>
+        <ul>
+          <li>Es flexible</li>
+          <li>Se puede extender</li>
+          <li>Facil de entender</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Understanding the PROTOTYPE</h2>
+        <p>Prototype es un objeto dentro de un objeto</p>
+        <p>Cada objeto puede tener su propio <em>Prototype</em> por lo tanto un <em>Prototype</em> puede contener un <em>Prototype</em></p>
+        <p>Si queremos acceder a las propiedades del <em>Prototype</em> nos podemos referir al objeto externo o ancestro mayor</p>
+        <img src="./media/proto_one.png" alt="">
+        <p><b>Prototype Chain</b> es la cadena de prototypes dentro de prototypes</p>
+        <img src="./media/proto_two.png" alt="">
+        <p>Podemos hacer que un objeto puede acceder al prototype de otro objeto, esto lo vamos a ver mas adelante.</p>
+      </section>
+      <section>
+        <h2>Everything is an Object (or a primitive)</h2>
+        <p>Todo lo que no es un primitive tiene un prototype (objetos, arrays, funciones, etc..) menos el objeto base, veamos</p>
+        <p>Primero creemos un objeto, una función y un array</p>
+        <pre><code>
+        var a = {};
+        var b = function(){};
+        var c = [];
+    </code></pre>
+        <p>Ahora desde la consola veamos que contiene el <b>prototype</b> para ver el prototype podemos usar <code>a.__proto__</code>, solo debemos usar <code>__proto__</code> para evr que es lo que contiene el prototype, aunque también lo podemos usar para
+          agregar métodos al objeto esto <b>NO</b> se debe hacer, pues afectaría el funcionamiento de la página.</p>
+        <img src="./media/proto_three.png" alt="">
+        <p>Podemos ver los métodos que siempre tiene un objeto y que podemos utilizar cuando queramos</p>
+        <p>Si miramos lo que contiene el <em>prototype</em> de una función:</p>
+        <img src="./media/proto_four.png" alt="">
+        <p>Ahora lo vamos a ver de una forma diferente pero si después de 'proto' ponemos un punto, nos van a aparecer los métodos que la función contiene por defecto cada vez que se crea una, vemos que entre ellas tenemos <em>call, apply y bind</em> que
+          ya vimos anteriormente de lo que se tratan.</p>
+        <p>Ahora veamos lo que contiene el <em>prototype</em> de una array</p>
+        <img src="./proto_five.png" alt="">
+        <p>Ahora vemos las mismas funciones que usamos cuando trabajamos con un array, push, slice, map, forEach, etc.</p>
+        <p>Que pasa si entramos al <em>prototype</em> del <em>prototype</em>?</p>
+        <img src="./media/proto_six.png" alt="">
+        <p>Encontramos los métodos que contiene el objeto base y como sabemos el objeto base no tiene <em>prototype</em> así que no podemos ir mas adentro.</p>
+      </section>
+      <section>
+        <h2>Reflextion and Extend</h2>
+        <p><b>REFLECTION: </b>Un Objeto puede verse a si mismo, enlistar y cambiar sus propiedades y métodos.</p>
+        <p><b>EXTEND: </b>Es un método de la libreria <b>Underscorejs</b> que usando <b>REFLECTION</b> copia parametros de un objeto a otro, este método es muy común en casi todas las librerias porque es muy util, en <b>Underscore</b> funciona así</p>
+        <pre><code>
+      //tenenemos varios objetos:
+      var objetoUno = {
+        propUno : 'Uno';
+        propDos : 'Dos'
+      }
+      var objetoDos = {
+        propTres : function(){
+          return this.propUno + this.propDos + this.propCuatro;
+        }
+      }
+      var objetoTres = {
+        propCuatro : : 'Cuatro'
+      }
+
+      _.extend(objetoUno, objetoDos, objetoTres)
+
+      //Se copian las propiedades del objetoDos y objetoTres al objetoUno
+    </code></pre>
+        <p><b>Importante!</b> ES6 tiene la propiedad <b>extends</b> que crea un <em>prototype</em></p>
+      </section>
+      <section>
+        <h2>Building Objects</h2>
+        <h3>Function Constructors y la palabra 'new'</h3>
+        <p>Cuando tenemos un objeto es muy probable que queramos crear multiples copias de ese objeto aunque a lo mejor con propiedades de diferentes valores, para lograr esto podemos usar la palabra <b>new</b> cuando usamos la palabra <em>new</em> se crea
+          un objeto completamente vacío, primero creemos la <b>función constructora</b> </p>
+        <pre><code>
+      function Carro(){
+          this.marca = 'Tesla';
+          this.color = 'Negro';
+      }
+    </code></pre>
+        <p>Ya tenemos nuestra función constructora, ahora queremos crerar una instancia o un objeto que contenga estas propiedades, esto lo hacemos usando la palabra <em>new</em>:</p>
+        <pre><code>
+      var miCarro = new Carro();
+    </code></pre>
+        <p>Ya debemos tener un nuevo objeto <em>miCarro</em> veamoslo en la consola</p>
+        <img src="./media/constructor_one.png" alt="">
+        <p>Ya tenemos una instancia del objeto Carro. Cuando <em>new</em> crea el objeto, se ejecuta la función constructora y los <b>this</b> que se encuentran dentro apuntan a este nuevo objeto creado</p>
+        <p>Ahora quiero poder crerar varios objetos pero con valores diferentes, lo que tenemos que hacer es pasarle argumentos a nuestra función constructora:</p>
+        <pre><code>
+      //Creamos una nueva función constructora
+      function Personaje(poder, genero){
+        this.poder = poder;
+        this.genero = genero
+      }
+      //Tenemos nuestra función constructora, ahora creemos multiples instancias
+      var avispa = new Personaje('aguijon', 'mujer');
+      var pantera =  new Personaje ('velocidad', 'hombre')
+      //Ahora veamoslos en la consola
+      console.log(pantera);
+      console.log(avispa);
+    </code></pre>
+        <img src="./media/constructor_two.png" alt="">
+        <p><b>DEFINICIÓN</b> <br> Función Constructora: Es una función normál que es usada para crear objetos. La variable <em>this</em> apunta al nuevo objeto creado y ese objeto es devuelto por la función de forma <b>automatica.</b></p>
+        <h3>Function constructors y 'Prototype'</h3>
+        <p>Cómo definimos el prototype??</p>
+        <p>Posiblemente nunca lo supimos pero las funciones además de contener código y que puede ser invocable con <code>()</code> y la posibilidad de darle nombre o no, pues bueno, también vienen con <em>prototype</em>, el tema es que este es solo usado
+          cuando usamos la palabra <em>new</em>, como vimos antes al crear una función constructora usamos la palabra <em>new</em> la cual crea un objeto en vacío y las variables <em>this</em> dentro de la función constructora hacen referencia a ese nuevo
+          contexto de ejecución y crean las propiedades que solicitamos. Además de suceder todo esto, al usar la palabra <em>new</em> ese nuevo objeto que se crea va a tener como <em>prototype</em> el de la función constructora, y todos los objetos creados
+          a partir de esa misma función constructora van a poder hacer uso de ese mismo prototype. Veamoslo mas claro con un ejemplo:</p>
+        <pre><code>
+      //Tenemos nuestros mismos personajes que salieron de la misma función constructora
+      function Personaje(poder, genero){
+        this.poder = poder;
+        this.genero = genero
+      }
+      var avispa = new Personaje('aguijon', 'mujer');
+      var pantera =  new Personaje ('velocidad', 'hombre')
+
+      //Ahora creemos un método dentro del prototype de la función constructora
+
+      Personaje.prototype.caracteristicas = function(){
+        return 'Este personaje es ' + this.genero + ' y su poder es ' + this.poder;
+      }
+
+      //Ahora veamos que pasa si logueamos uno de los personajes
+      console.log(pantera)
+
+      //Ahora usemos ese nuevo método al que tenemos acceso
+      avispa.caracteristicas();
+    </code></pre>
+        <p>Si hicimos lo anterior vimos lo siguiente en la consola:</p>
+        <img src="./media/proto_seven.png" alt="">
+        <p>Esta una habilidad muy interesante que tiene JS pues como vimos podemos agregar lo que queremos dentro del <em>prototype</em> cuando queramos. Generalmente los métodos se crean usando el <em>prototype</em> y no declarandolos dentro de la función
+          constructora, de esta forma<b> evitamos crear una función por cada objeto cuando es creado, usando el prototype los objetos hacen referencia a sus métodos pero no se crea una copia nueva cuando el objeto es creado</b> de esta forma evitamos
+          ahorramos el uso de memoria.</p>
+        <p><b>IMPORTANTE</b> Crear métodos usando prototype</p>
+      </section>
+      <section>
+        <h2>DANGEROUS ASIDE - new and Functions</h2>
+        <p>Nos podemos haber preguntado por que cuando creamos una función constructora le ponemos la primera letra mayuscula, pues bueno, esto es con el fin recordarnos a nosotros mismo que esta es una función constructora y que por lo tanto para crear
+          una instancia debemos usar la palabra <b>new</b> porque si no la usamos la función será igual invocada pero no tendremos los resultados esperados pues ya sabemos que <em>new</em> hace que sucedan muchas cosas. Si no usamos <em>new</em> cuando
+          lo necesitamos vamos a tener muchos errores :(</p>
+        <p><b>IMPORTANTE:</b> Siempre comenzar una función constructora con mayuscula</p>
+      </section>
+      <section>
+        <h2>CONCEPTUAL ASIDE: Built-in function constructors</h2>
+        <p>Hay varias funciones contructoras que JS ya trae por defecto, por ejemplo podemos usar:</p>
+        <pre><code>
+      var a = new String;
+      var b = new Number;
+        </code></pre>
+        <p>De esta forma estamos usando funciones constructoras para 'crear' numeros y strings o almenos eso es lo que creemos, como vimos antes los strings y los numeros son primitivos de JS no precisamente objetos y como también vimos antes la palabra
+          <em>new</em> crea <b>objetos</b> mmm un poco confuso no? numeros y strings son primitvos pero podemos crear objetos de ellos? bueno, si es poco confuso además que el engine se comporta un poco diferente con estos dos constructores:</p>
+        <pre><code>
+          //Mostremos lo siguiente en la la consola
+          'Andres'.length
+          //Y después esto:
+          4.toFixed
+        </code></pre>
+        <p>Si ejecutamos los dos comandos anterior por aparte en la consola nos dimos cuenta que el primoer funcionó muy bien pero el segundo nos dio un error, bueno estos <b>sucede porque el engine trata de forma diferente los números y los strings, miemtras los strings son convertidos inmediatamente en objetos los objetos no lo son, por eso es que podemos usar los métodos de uno pero no los del otro.</b></p>
+        <p>Podemos también crear métodos en el prototype de cualquiera de estos objetos y poder utilizar estos métodos cuando queramos, esta es en realidad la forma en que JS funciona y muchos frameworks y librerias sacan provecho de esta funcionalidad:</p>
+        <pre><code>
+          Number.prototype.positivo = function(){
+            return this > 0;
+          }
+        </code></pre>
+        <p>Veamoslo en la consola</p>
+        <img src="./media/constructor_three.png" alt="">
+        <p>Le creamos una función al prototype de Number y ahora podemos acceder a este método desde cualquier primitivo que sea número</p>
+
+        <h2>DANGEROUS ASIDE: Built inf Function Constructors</h2>
+        <p>Cuando usamos las funciones constructoras que vienen incorporadas dentro JS (new Number, new String, new Date etc) debemos tener en cuenta que estamos creando un Objeto y no un primitivo y po lo tanto si quieremos en algún momento hacer comparación
+          entre un numbero creado a partir de <code>var numeroCons = new Number(3)</code> y otro numero creado como primitivo <code>var numeroPrimitivo = 3</code> pues vamos a tener problemas porque uno es un objeto y el otro un primitivo y si hacemos:
+          <code>numeroCons === numeroPrimitivo</code> pues nos va a dar falso! <b>Importante tenerlo en cuenta</b></p>
+        <p><b>IMPORTANTE:</b> Si en algún momento vamos a trabajar con fechas hay un framewrok que se llama <b>moment.js</b> que es de mucha ayuda para trabajar con fechas</p>
+
+        <h2>DANGEROUS ASIDE: Arrays and for..in</h2>
+        <p><b>for..in</b> lo usamos para iterar sobre las propiedades de un objeto, por ejemplo:</p>
+        <pre><code>
+          var miCasa = {
+            pisos: 3,
+            color: 'verde',
+            ventanas: 4
+          }
+
+          for(prop in miCasa){
+            console.log(prop +':'+miCasa[prop])
+          }
+        </code></pre>
+        <img src="./media/forin_one.png" alt="">
+        <p>Funciona muy bien, y en teoria también lo podemos usar con los arrays pues al final son objetos que contiene pares de nombre/valor el nombre siendo el index o posición y el valor, el problema es que si le agregamos algúna otra propiedad al prototype
+          del array, esta propiedad va a hacer parte de la iteración, va a ser incluido dentro de los resultados.</p>
+      </section>
+      <section>
+        <h2>Object.create and Prototypal Inheritance</h2>
+        <p>Lo que vimos anteriormente acerca de las funciones constructoras es al final una forma en la que JS imitiaba la forma en que las funciones constructoras funcionan en otros lenguajes de programación, en otros lenguajes se crean classes que es el
+          'blueprint' o 'plano' desde el cual se producen copias de objetos y esto se hace usando la palabra <em>new</em>. De un tiempo para aca JS ha adoptado su propia forma de construir objetos y que es única para el lenguaje y al final puede ser mas
+          facil de entender y de usar.</p>
+        <p><b>Pure Prototypal Inheritance - Importante</b></p>
+        <p>Veamos de lo que se trata con unos ejemplos:</p>
+        <pre><code>
+          //Vamos a crear un simple objeto
+          var persona ={
+            nombre: 'Nombre defecto',
+            apellido: 'Apellido defecto',
+            saludar: function(){
+              return 'Hola soy ' + this.nombre;            }
+          }
+
+          //Y ahora vamos a usar Object.create para construir un nuevo objeto
+
+          var Juan = Object.create(persona);
+        </code></pre>
+        <p>Así es como creamos un objeto usando <b>Object.create</b> veamos que nos muestra la consola:</p>
+        <img src="./media/pure_prototypal_one.png" alt="">
+        <p><b>Es un objeto Vacio!</b> lo que vemos ahora es un objeto vacío pero que tiene como prototype las propiedades del objeto desde el que fue creado. Para <b>cambiar estas propiedades</b> lo que tenemos que hacer es sobreescribirlas: </p>
+        <pre><code>
+          //Vamos a crear un simple objeto
+          var persona ={
+            nombre: 'Nombre defecto',
+            apellido: 'Apellido defecto',
+            saludar: function(){
+              return 'Hola soy ' + this.nombre;            }
+          }
+
+          //Y ahora vamos a usar Object.create para construir un nuevo objeto
+
+          var Juan = Object.create(persona);
+
+          //Cambiemos el valor de la propiedad 'nombre'
+
+          Juan.nombre = 'Juan';
+
+          //Ahora usemos el método que tenemos en el prototype
+
+          Juan.saludar();
+        </code></pre>
+        <p>Vemoslo en consola:</p>
+        <img src="./media/pure_prototypal_two.png" alt="">
+        <p>Esta es una forma es mucho mas clara y muy facil de usar para cuando queramos construir objetos.</p>
+      </section>
+      <section>
+        <h2>ES6 and CLASSES</h2>
+        <p>Ahora en ES6 podemos usar <b>classes</b> aunque en JS las clases no son exactamente lo mismo a lo que son en otros lenguajes de programación, en otros lenguajes las clases son basicamente una plantilla de lo que queremos crear con bases en ellas
+          pero no son mas que eso, en JS las classes aunque también funcionan como plantillas también son objetos, una clase es un objeto en JS.</p>
+        <p>No mucha gente parece estar de acuredo con la implementación de classes en JS porque como vimos antes con el <b>Pure Prototypal Inheritance</b> JS ya tiene una forma de hacer basicamente lo mismo, pero bueno veamos como se usa:</p>
+        <pre><code>
+          //Creemos una clase
+
+          class Person{
+            constructor(firstname, lastname){
+              this.firstname = firstname;
+              this.lastname = lastname;
+            }
+
+            greet(){
+              return 'Hi ' + firstname
+            }
+          }
+
+          //Ahora creemos un objeto a partir de la class
+
+          var Juan = new Person('Juan', 'Puentes');
+        </code></pre>
+        <p>De esta forma creamos una instancia del objeto, aquí funciona un poco diferente porque tenemos que definir el <b>prototype</b>, pensemos que queremos que <em>Person</em> sea el <em>prototype</em> pero además queremos que otra clase con otras propiedades
+          sea la constructora:</p>
+        <pre><code>
+          class Piloto extends Person {
+            constructor (firstname, lastname){
+              super(firstname, alstname);
+            }
+            greet(){
+              return 'Mi nombre es ' + firstname + ' y soy piloto'
+            }
+          }
+
+          //Usamos 'extend' para crear definir el prototype
+          //Usamo 'super' para
+        </code></pre>
+
+        <p>Esto es un simple repaso de estas 'nuevas' formas de crear Objetos, la vamos aprofundizar mas adelante</p>
+      </section>
+      <section>
+        <h2>ODDS AND ENDS</h2>
+        <h3>STRICT MODE</h3>
+        <P><code>'use strict'</code> hace parte de JS y nos permite de alguna forma cometer menos errores porque nos avisa cuando se encuentra con algo extraño como por ejemplo cuando declaramos una variable con un nombre pero cuando la usamos lo hacemos
+          con otro nombre que no fue declarado, por ejemplo:</P>
+        <pre><code>
+          //declaramos que queremos hacer uso del modo estricto
+
+          'use strict'
+
+          var locomotora;
+          locomoora = 'super rapida'; //hay un typo, nos falta la T en locomotora
+          console.log(locomoora)
+        </code></pre>
+        <p>En este ejemplo estamos declarando una variable pero usamos una con un nombre distinto y que no fue declarado, veamos que pasa en la consola:</p>
+        <img src="./media/use_strict.png" alt="">
+        <p>Para saber mas del <b>modo estricto</b> podemos revisar el siguiente vinculo <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Modo_estricto">Modo estricto</a>.</p>
+      </section>
+      <section>
+        <h2>jQuery</h2>
+        <h2>Method Chaining</h2>
+        <p>Cuando llamamos un método justo después de otro y cada método afecta el objeto padre. <code>obj.methos1().method2()</code> y los dos métodos terminan con las variable 'this' apuntando al 'objeto'</p>
+      </section>
+      <section>
+        <h2>Our Own FRAMEWORK</h2>
+        <p></p>
+        <h3>Structuring Safe Code</h3>
+
+
+      </section>
+
+
 </body>
 
 </html>
